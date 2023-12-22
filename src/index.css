@@ -22,13 +22,21 @@
 	--emerald: #059669;
 	--teal: #2dd4bf;
 
+  --off-white: #22d3ee
+
 	--border-radius: 6px;
 }
 
 a {
 	text-decoration: inherit;
 }
+
 a:hover {
+  text-decoration: underline;
+}
+
+
+a:active {
 	color: #535bf2;
 }
 
