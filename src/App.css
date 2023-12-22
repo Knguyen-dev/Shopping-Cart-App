@@ -1,0 +1,78 @@
+.app-layout {
+	min-height: 100vh;
+	display: grid;
+	grid-template-rows: auto 80% auto;
+}
+
+#app-header nav {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	padding: 1em 4em;
+	background-color: var(--emerald);
+	column-gap: 1em;
+}
+
+.site-brand-container {
+	margin-right: 1em;
+	font-size: 2em;
+}
+
+.search-form {
+	display: flex;
+	flex: auto;
+	border-radius: var(--border-radius);
+	overflow: hidden;
+	min-width: 200px;
+}
+.search-form input {
+	border-top-right-radius: 0;
+	border-bottom-right-radius: 0;
+}
+.search-form button {
+	border-top-left-radius: 0;
+	border-bottom-left-radius: 0;
+	background-color: var(--teal);
+	padding: 0.8em 0.8em;
+}
+
+.nav-links {
+	display: flex;
+	column-gap: 12px;
+	font-size: 1em;
+	flex-basis: 30%;
+	justify-content: flex-end;
+}
+.nav-links a {
+	background-color: var(--teal);
+	padding: 6px 8px;
+	border-radius: var(--border-radius);
+}
+
+/* footer styles */
+
+#app-footer {
+	background-color: var(--emerald);
+	padding: 0.5em 0.5em;
+	text-align: center;
+}
+
+.footer-nav-links {
+	display: flex;
+	justify-content: center;
+	column-gap: 1em;
+}
+
+.auth-layout {
+	display: flex;
+	flex-direction: column;
+	min-height: 100vh;
+}
+
+.auth-layout footer {
+	margin-top: auto;
+}
+
+.auth-layout main {
+	display: flex;
+}
