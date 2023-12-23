@@ -11,12 +11,15 @@ import AuthLayout from "./pages/layouts/AuthLayout";
 // Pages
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
+import HomePage from "./pages/HomePage";
 
 import "./App.css";
 const appRouter = createBrowserRouter(
 	createRoutesFromElements(
 		<Route path="/">
-			<Route path="app" element={<AppLayout />}></Route>
+			<Route path="app" element={<AppLayout />}>
+				<Route index element={<HomePage />} />
+			</Route>
 
 			<Route path="auth" element={<AuthLayout />}>
 				<Route path="login" element={<LoginPage />} />

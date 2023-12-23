@@ -22,9 +22,10 @@
 	--emerald: #059669;
 	--teal: #2dd4bf;
 
-  --off-white: #22d3ee
+	--deep-purple: #111827;
+	--orange: #ffc038;
 
-	--border-radius: 6px;
+	--off-white: #22d3ee --border-radius: 6px;
 }
 
 a {
@@ -32,14 +33,9 @@ a {
 }
 
 a:hover {
-  text-decoration: underline;
+	text-decoration: underline;
 }
-
 
 a:active {
 	color: #535bf2;
-}
-
-body {
-	min-height: 100vh;
 }

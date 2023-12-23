@@ -1,9 +1,3 @@
-.app-layout {
-	min-height: 100vh;
-	display: grid;
-	grid-template-rows: auto 80% auto;
-}
-
 .search-form {
 	display: flex;
 	flex: auto;
@@ -11,11 +5,8 @@
 	overflow: hidden;
 	min-width: 200px;
 }
+
 .search-form input {
 	border-top-right-radius: 0;
 	border-bottom-right-radius: 0;
-}
-.search-form button {
-	background-color: var(--teal);
-	padding: 0.8em 0.8em;
 }

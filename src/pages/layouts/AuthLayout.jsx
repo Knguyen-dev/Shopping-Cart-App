@@ -4,10 +4,10 @@ import "../../styles/AuthLayout.css";
 
 export default function AuthLayout() {
 	return (
-		<div className="tw-flex tw-flex-col tw-gap-y-10 tw-min-h-screen">
-			<main className="tw-text-center tw-gap-y-6 md:tw-gap-x-20 tw-flex tw-flex-col tw-flex-auto tw-justify-center tw-items-center md:tw-flex-row">
+		<div className="tw-flex tw-min-h-screen tw-flex-col">
+			<main className="tw-flex tw-flex-auto tw-flex-col tw-items-center tw-justify-center tw-gap-y-6 tw-py-10 tw-text-center md:tw-flex-row md:tw-gap-x-20">
 				<div className="">
-					<h1 className="tw-text-5xl tw-mb-2">GamerCity</h1>
+					<h1 className="tw-mb-2 tw-text-5xl">GamerCity</h1>
 					<p>Connect with gamers around the world!</p>
 				</div>
 				<Outlet />

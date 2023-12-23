@@ -1,9 +1,11 @@
+import { NavLink } from "react-router-dom";
+
 export default function RegisterPage() {
 	return (
-		<div className="form-container tw-w-1/2 md:tw-w-1/3 tw-py-6 tw-px-4 tw-rounded-md">
+		<div className="form-container tw-w-2/3 tw-rounded-md tw-px-4 tw-py-6 sm:tw-w-1/3">
 			<h1 className="tw-mb-5 tw-text-xl">Sign up Today!</h1>
 			<form id="sign-up-form">
-				<div className="tw-flex tw-flex-col tw-gap-y-3 tw-mb-4">
+				<div className="tw-mb-4 tw-flex tw-flex-col tw-gap-y-3">
 					<div className="form-floating">
 						<input
 							type="text"
@@ -57,12 +59,12 @@ export default function RegisterPage() {
 					</div>
 
 					<button
-						className="tw-py-3 tw-rounded-md tw-text-white tw-bg-blue-500 tw-font-bold"
+						className="tw-rounded-md tw-bg-blue-500 tw-py-3 tw-font-bold tw-text-white"
 						type="submit">
 						Create account
 					</button>
 					<span>
-						Already have an account? <a href="#">Sign in</a>
+						Already have an account? <NavLink to="/auth/login">Sign In</NavLink>
 					</span>
 				</div>
 				<hr></hr>

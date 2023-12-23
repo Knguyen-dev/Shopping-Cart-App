@@ -1,8 +1,9 @@
+import { NavLink } from "react-router-dom";
 export default function LoginPage() {
 	return (
-		<div className="form-container tw-w-1/2 md:tw-w-1/3 tw-py-6 tw-px-4">
+		<div className="form-container tw-w-1/2 tw-px-4 tw-py-6 md:tw-w-1/3">
 			<form id="login-form">
-				<div className="tw-flex tw-flex-col tw-gap-y-3 tw-mb-4">
+				<div className="tw-mb-4 tw-flex tw-flex-col tw-gap-y-3">
 					<div className="form-floating">
 						<input
 							type="email"
@@ -27,15 +28,15 @@ export default function LoginPage() {
 						</label>
 					</div>
 					<button
-						className="tw-py-3 tw-rounded-md tw-text-white tw-bg-blue-500 tw-font-bold"
+						className="tw-rounded-md tw-bg-blue-500 tw-py-3 tw-font-bold tw-text-white"
 						type="submit">
 						Log In
 					</button>
-					<a href="#">Forgot Password?</a>
+					<NavLink to="/auth/register">Forgot Password?</NavLink>
 				</div>
 				<hr></hr>
 				<div className="tw-mt-3 tw-flex tw-justify-center">
-					<button className="tw-text-white tw-rounded-md tw-px-5 tw-py-3 tw-font-bold tw-bg-emerald-500">
+					<button className="tw-rounded-md tw-bg-emerald-500 tw-px-5 tw-py-3 tw-font-bold tw-text-white">
 						Create New Account
 					</button>
 				</div>
