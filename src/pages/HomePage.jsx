@@ -1,28 +1,26 @@
+import Card from "./components/Card";
+import { sampleGames } from "../assets/sampleData";
+
+
 /*
-+ Steam home Page: https://store.steampowered.com/
+- BOOK MARK: 
 
-- If using gaming background, have shown only one our home page. 
++ Create react or styled components:
 
+1. Hovering buttons
+2. Floating Labels
+3. Input group: So like the input with floating label and then button, like a smooth search bar
+
+4. A general rounded button component or style that we can use would be nice 
 
 */
 
-import Card from "./components/Card";
-import "../styles/HomePage.css";
+
+
 
 export default function HomePage() {
-	const sampleGame = {
-		title: "Elden Ring",
-		platforms: ["PC", "PlayStation", "Xbox"],
-		price: "$12.98",
-		img: "https://media.rawg.io/media/games/b29/b294fdd866dcdb643e7bab370a552855.jpg",
-		release_date: "2022/02/25",
-		details:
-			"The Golden Order has been broken. Rise, Tarnished, and be guided by grace to brandish the ",
-		store_link: "https://en.bandainamcoent.eu/elden-ring/elden-ring",
-	};
-
 	return (
-		<div className="home-page">
+		<div className="tw-flex tw-flex-col tw-min-h-screen">
 			<div className="tw-my-5 tw-flex tw-flex-col tw-items-center tw-gap-y-4 tw-text-center tw-text-black">
 				<h2 className="tw-text-4xl">Welcome to GamerCity</h2>
 				<p className="tw-text-md tw-mx-auto tw-w-2/4 ">
@@ -35,21 +33,24 @@ export default function HomePage() {
 				</button>
 			</div>
 
-			<section
-				id="featured-items"
-				className="mx-auto ck tw-container md:tw-container">
-				<h1 className="tw-text-center tw-text-4xl">Featured Items</h1>
 
-				{/* One giant card, with image, and then description for slide could work */}
-				<div className="card-container"></div>
-			</section>
+      <section id="featured" className=" tw-py-6 tw-mt-auto tw-mb-6">
+        <h1 className="tw-text-center tw-text-black tw-text-6xl tw-mb-10">Featured Games</h1>
+        <div className="featured-container tw-flex tw-flex-col tw-justify-center tw-items-center tw-gap-4 tw-px-16 tw-mx-auto lg:tw-flex-row">
+          {
+            sampleGames.map((game,index) => <Card key={index} item={game} cardSize={400}/>)
+          }
+        </div>
+      </section>
 
-			<div className="tw-mt-auto tw-flex tw-flex-col tw-items-center tw-justify-evenly tw-gap-8 tw-bg-indigo-500 tw-p-10 md:tw-flex-row">
+
+    
+			<div className="tw-text-center tw-mt-auto tw-flex tw-flex-col tw-items-center tw-justify-evenly tw-gap-8 tw-bg-indigo-500 tw-p-10 md:tw-flex-row">
 				<div className="tw-max-w-96 tw-text-white">
-					<h2 className="tw-text-2xl">Lorem ipsum dolor sit amet.</h2>
+					<h2 className="tw-text-2xl">Sign up to our newsletter!</h2>
 					<p>
-						Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod atque
-						laboriosam harum pariatur quis tempore!
+						The GamerCity newsletter delivers fresh videogame content every week. Sign up
+            to receive the latest news in the industry!
 					</p>
 				</div>
 

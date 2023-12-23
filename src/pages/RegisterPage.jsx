@@ -1,63 +1,19 @@
 import { NavLink } from "react-router-dom";
+import FloatingInput from "./components/FloatingInput";
 
 export default function RegisterPage() {
 	return (
-		<div className="form-container tw-w-2/3 tw-rounded-md tw-px-4 tw-py-6 sm:tw-w-1/3">
+		<div className="form-container tw-w-2/3 tw-rounded-md tw-px-4 tw-py-6 sm:tw-w-2/5">
 			<h1 className="tw-mb-5 tw-text-xl">Sign up Today!</h1>
 			<form id="sign-up-form">
 				<div className="tw-mb-4 tw-flex tw-flex-col tw-gap-y-3">
-					<div className="form-floating">
-						<input
-							type="text"
-							id="full-name"
-							placeholder="Full Name:"
-							className="form-control"
-							required
-						/>
-						<label htmlFor="full-name" className="form-label">
-							Full Name:
-						</label>
-					</div>
+			
+          <FloatingInput type="text" id="full-name" placeholder="Full Name:" labelText="Full Name:" />
+          <FloatingInput type="email" id="login-email" placeholder="Email:" labelText="Email:" />
+          <FloatingInput type="password" id="login-password" placeholder="Password:" labelText="Password:" />
+          <FloatingInput type="password" id="confirm-login-password" placeholder="Retype Password:" labelText="Retype Password:" />
 
-					<div className="form-floating">
-						<input
-							type="email"
-							id="login-email"
-							placeholder="Email:"
-							className="form-control"
-							required
-						/>
-						<label htmlFor="login-email" className="form-label">
-							Email
-						</label>
-					</div>
-
-					<div className="form-floating">
-						<input
-							type="password"
-							id="password"
-							placeholder="Password:"
-							className="form-control"
-							required
-						/>
-						<label htmlFor="password" className="form-label">
-							Password:
-						</label>
-					</div>
-
-					<div className="form-floating">
-						<input
-							type="password"
-							id="confirm-password"
-							placeholder="Confirm Password:"
-							className="form-control"
-							required
-						/>
-						<label htmlFor="confirm-password" className="form-label">
-							Confirm Password:
-						</label>
-					</div>
-
+          
 					<button
 						className="tw-rounded-md tw-bg-blue-500 tw-py-3 tw-font-bold tw-text-white"
 						type="submit">

@@ -1,5 +1,6 @@
 import { NavLink, Outlet } from "react-router-dom";
 import "../../styles/AppLayout.css";
+
 function Navbar() {
 	return (
 		<nav className="tw-flex tw-flex-col tw-items-center tw-gap-4 sm:tw-flex-row sm:tw-gap-x-12">
@@ -7,7 +8,8 @@ function Navbar() {
 				<NavLink to="/app">GamerCity</NavLink>
 			</div>
 
-			<form className="search-form">
+
+			<form className="input-group">
 				<input
 					type="text"
 					className="form-control"
