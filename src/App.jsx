@@ -12,6 +12,7 @@ import AuthLayout from "./pages/layouts/AuthLayout";
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
 import HomePage from "./pages/HomePage";
+import BrowsingPage from "./pages/BrowsePage";
 
 import "./App.css";
 const appRouter = createBrowserRouter(
@@ -19,6 +20,8 @@ const appRouter = createBrowserRouter(
 		<Route path="/">
 			<Route path="app" element={<AppLayout />}>
 				<Route index element={<HomePage />} />
+
+				<Route path="browse" element={<BrowsingPage />} />
 			</Route>
 
 			<Route path="auth" element={<AuthLayout />}>

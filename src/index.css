@@ -12,20 +12,16 @@
 :root {
 	font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
 
-	background-color: #242424;
-
 	font-synthesis: none;
 	text-rendering: optimizeLegibility;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 
-	--emerald: #059669;
-	--teal: #2dd4bf;
+	--bg-primary-dark: #0f1011;
+	--bg-secondary-dark: #111827;
 
-	--deep-purple: #111827;
-	--orange: #ffc038;
-
-	--off-white: #22d3ee --border-radius: 6px;
+	--border-radius: 6px;
+	--transition: all 200ms ease-in-out;
 }
 
 a {
@@ -36,6 +32,24 @@ a:hover {
 	text-decoration: underline;
 }
 
-a:active {
-	color: #535bf2;
+/* ===== Scrollbar CSS ===== */
+/* Firefox */
+* {
+	scrollbar-width: thin;
+	scrollbar-color: #a493a9 #ffffff;
+}
+
+/* Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+	width: 8px;
+}
+
+*::-webkit-scrollbar-track {
+	background-color: var(--primary-dark);
+}
+
+*::-webkit-scrollbar-thumb {
+	background-color: #a493a9;
+	border-radius: 10px;
+	border: 3px solid #ffffff;
 }

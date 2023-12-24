@@ -1,34 +1,46 @@
-/* eslint-disable react/prop-types */
+import {
+	FaWindows,
+	FaPlaystation,
+	FaXbox,
+	FaApple,
+	FaAndroid,
+} from "react-icons/fa";
 
 // Card for games
 import PropTypes from "prop-types";
-export default function Card({ item, cardSize }) {
+export default function GameCard({ gameObj }) {
 	return (
-		<div className="card tw-shadow-lg" style={{ width: `${cardSize}px` }}>
-			<img src={item.img} className="card-img-top" alt="..." />
-			<div className="card-body tw-bg-indigo-500 tw-text-white tw-flex tw-flex-col tw-gap-y-2">
+		<div className="card" style="width: 18rem;">
+			<img className="card-img-top" src={gameObj.img} alt="Card image cap" />
+			<div className="card-body">
+				<div className="">
+					<button className="btn btn-primary">Add to Cart</button>
+					<span>{gameObj.price}</span>
+				</div>
 
-        <div className="">
-          <h5 className="card-title tw-text-xl">{item.title}</h5>
-          <p className="card-text">{item.price}</p>
-        </div>
-        
-        <p>{item.platforms}</p>
-
-        <div className="card-actions tw-flex tw-gap-x-2 tw-text-center">
-          <a href="#" className="tw-bg-indigo-700 tw-text-teal-300 tw-flex-1 tw-py-3">
-            Visit
-          </a>
-          <a href="#" className="tw-bg-indigo-700 tw-text-teal-300 tw-flex-1 tw-py-3">
-            Add To Cart
-          </a>
-        </div>
+				<div className="platform-icons">
+					{gameObj.platforms.map((platform) => {
+						switch (platform) {
+							case "PC":
+								return <FaWindows />;
+							case "PlayStation":
+								return <FaPlaystation />;
+							case "Xbox":
+								return <FaXbox />;
+							case "IOS":
+								return <FaApple />;
+							case "Android":
+								return <FaAndroid />;
+							default:
+								return platform;
+						}
+					})}
+				</div>
+				<h5 className="card-title">{gameObj.title}</h5>
 			</div>
 		</div>
 	);
 }
-Card.propTypes = {
-	cardImg: PropTypes.string,
-	cardTitle: PropTypes.string,
-	cardText: PropTypes.string,
+GameCard.propTypes = {
+	gameObj: PropTypes.object,
 };
