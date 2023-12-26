@@ -1,0 +1,49 @@
+/*
+- Stylings for the game card itself: Let the width be 
+  determined by the grid column's sizes, but for the height, we want
+  all cards to have the same height so we'll have a fixed height for that
+
+
+*/
+
+.game-card {
+	width: 100%;
+	height: 300px;
+	background-color: var(--bg-secondary-dark);
+	@apply tw-flex tw-cursor-pointer tw-flex-col tw-overflow-hidden tw-rounded-lg tw-text-white tw-transition-all;
+}
+.game-card:hover {
+	scale: 1.05;
+}
+
+.card-img-container {
+	/* Set a height for all image containers, and
+    then have images fill dimensions 100% */
+	height: 50%;
+	flex: 0 0 auto;
+}
+.card-img-container img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+
+.card-body {
+	@apply tw-flex tw-flex-col tw-px-4 tw-py-2;
+}
+
+.card-body .header-info {
+	@apply tw-mb-4 tw-flex tw-items-center tw-justify-between tw-text-slate-400;
+}
+
+.add-cart-btn {
+	@apply tw-rounded-md tw-bg-slate-800 tw-px-6 tw-py-2;
+}
+
+.platform-icon-list {
+	@apply tw-flex tw-gap-x-3;
+}
+
+.card-title {
+	@apply tw-mt-auto tw-text-xl;
+}
