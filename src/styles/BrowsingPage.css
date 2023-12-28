@@ -84,19 +84,18 @@
 	@apply tw-mb-2 tw-text-4xl tw-font-medium;
 }
 
-.order-by-games {
-	color: var(--bg-primary-dark);
-	@apply tw-bg-white;
+.drop-downs-container {
+	@apply tw-flex tw-gap-x-2;
 }
 
-.game-drop-down button {
+.custom-drop-down button {
 	@apply tw-flex tw-items-center tw-gap-x-1 tw-rounded-md tw-bg-white tw-px-4 tw-py-2 tw-text-black;
 }
 
-.game-drop-down .dropdown-item {
+.custom-drop-down .dropdown-item {
 	@apply tw-flex tw-items-center tw-justify-between tw-transition-all;
 }
-.game-drop-down .dropdown-item:hover {
+.custom-drop-down .dropdown-item:hover {
 	background-color: rgba(0, 0, 0, 0.1);
 }
 

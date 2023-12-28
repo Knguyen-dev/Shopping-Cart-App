@@ -12,7 +12,7 @@ export default function HomePage() {
 				</p>
 
 				<button className="tw-rounded-sm tw-bg-slate-500 tw-px-5 tw-py-2 tw-text-xl tw-text-white">
-					<NavLink to="/app/browse">Shop Now</NavLink>
+					<NavLink to="/browse">Shop Now</NavLink>
 				</button>
 			</div>
 		</div>

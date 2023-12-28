@@ -18,12 +18,11 @@ import "./App.css";
 const appRouter = createBrowserRouter(
 	createRoutesFromElements(
 		<Route path="/">
-			<Route path="app" element={<AppLayout />}>
+			<Route path="" element={<AppLayout />}>
 				<Route index element={<HomePage />} />
 
 				<Route path="browse" element={<BrowsingPage />} />
 			</Route>
-
 			<Route path="auth" element={<AuthLayout />}>
 				<Route path="login" element={<LoginPage />} />
 				<Route path="register" element={<RegisterPage />} />

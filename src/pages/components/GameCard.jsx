@@ -3,8 +3,10 @@ import {
 	FaPlaystation,
 	FaXbox,
 	FaApple,
+	FaMobileAlt,
 	FaAndroid,
 } from "react-icons/fa";
+import { BsNintendoSwitch } from "react-icons/bs";
 
 import "../../styles/GameCard.css";
 
@@ -12,24 +14,42 @@ import "../../styles/GameCard.css";
 import PropTypes from "prop-types";
 
 /*
-+ Array of platforms: Basically if a game is available on any of the platforms
++ Logic for rendering the icons for what platforms a game runs on
+
++ platform_map: Array of platforms: Basically if a game is available on any of the platforms
   below, we'll render a related icon on the game's card.
 
+  1. Using the substrings below, we will check if a game's platform contains
+  the string, if so then we know a game runs on said platform.
+
++ icon_map: Link those strings with their corresponding icons representing 
+  the platform. With this we'll be able to map those strings stored in
+  'platformNames' and render the platform icons.
+
+NOTE: We used Rawg API's 'games' endpoint to see what strings were acceptable 
+  to use to match the games and we lowercased them. You can also reference 'parent_platforms' 
+  endpoint, but cross-reference your information as a parent platform would be 'macintosh' 
+  but the platform names received by the game endpoint would be 'macOS', so there
+  could be differences.
 */
 const platform_map = {
 	pc: "pc",
+	macOS: "macos",
 	playstation: "playstation",
 	xbox: "xbox",
 	ios: "ios",
 	android: "android",
+	nintendo: "nintendo",
 };
 
 const icon_map = {
 	[platform_map.pc]: <FaWindows />,
+	[platform_map.macOS]: <FaApple />,
 	[platform_map.playstation]: <FaPlaystation />,
 	[platform_map.xbox]: <FaXbox />,
-	[platform_map.ios]: <FaApple />,
+	[platform_map.ios]: <FaMobileAlt />,
 	[platform_map.android]: <FaAndroid />,
+	[platform_map.nintendo]: <BsNintendoSwitch />,
 };
 
 export default function GameCard({ gameObj }) {

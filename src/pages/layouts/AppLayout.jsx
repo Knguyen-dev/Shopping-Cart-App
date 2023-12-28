@@ -5,7 +5,7 @@ function Navbar() {
 	return (
 		<nav className="tw-flex tw-flex-col tw-items-center tw-gap-4 sm:tw-flex-row sm:tw-gap-x-12">
 			<div className="tw-text-2xl tw-font-medium">
-				<NavLink to="/app">GamerCity</NavLink>
+				<NavLink to="/">GamerCity</NavLink>
 			</div>
 
 			<form className="input-group">
@@ -22,7 +22,7 @@ function Navbar() {
 			</form>
 
 			<ul className="tw-flex tw-flex-col tw-items-center tw-justify-evenly tw-gap-x-4 tw-gap-y-2 tw-text-xl sm:tw-w-1/5 sm:tw-flex-row ">
-				<NavLink to="/app/browse">Browse</NavLink>
+				<NavLink to="/browse">Browse</NavLink>
 				<NavLink>Cart</NavLink>
 				<NavLink>User</NavLink>
 			</ul>

@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 .home-page {
-	background-image: url("../assets/night_background.jpg");
+	background-image: url("../assets/images/night_background.jpg");
 	background-size: cover;
 	background-position: center;
 	background-attachment: fixed;
