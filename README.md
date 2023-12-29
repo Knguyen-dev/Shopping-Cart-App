@@ -1,17 +1,16 @@
 # React + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
-
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-
 /*
 - BOOK MARK: 
 1. Next we should set up some tests to practice what we've learned for testing in javascript and react. 
   Also to make sure everything works of cse
+
+- Sometimes for games with long titles, the title doesn't fit on the card, 
+  so we need to refine css.
+
+
+
+
 2. Set up our search button to work.
 3. Set up the template for the game page and dynamic segments using slugs we 
 4. Set up shopping cart page and somehow link it to the browsing page. Here we

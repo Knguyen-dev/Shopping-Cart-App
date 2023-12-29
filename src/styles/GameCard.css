@@ -5,10 +5,19 @@
 
 
 */
+/* 
+- We want the cards to take 100% of their column defined by the 
+  grid. However, the min-height of the cards will be 300px, except in the case
+  where the content, the title in this case, is longer. In that case the cards
+  with the longer title will be taller. 
 
+  NOTE: With this not all of the cards will be the same uniform height, but 
+  at least the content will be comfortably visible.
+
+*/
 .game-card {
 	width: 100%;
-	height: 300px;
+	height: minmax(300px, auto);
 	background-color: var(--bg-secondary-dark);
 	@apply tw-flex tw-cursor-pointer tw-flex-col tw-overflow-hidden tw-rounded-lg tw-text-white tw-transition-all;
 }
@@ -20,7 +29,6 @@
 	/* Set a height for all image containers, and
     then have images fill dimensions 100% */
 	height: 50%;
-	flex: 0 0 auto;
 }
 .card-img-container img {
 	width: 100%;

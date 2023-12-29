@@ -88,7 +88,7 @@ export default function GameCard({ gameObj }) {
 	return (
 		<div className="game-card">
 			<div className="card-img-container">
-				<img src={gameObj.background_image} alt="Card image cap" />
+				<img src={gameObj.background_image} alt="Game Cover Image" />
 			</div>
 
 			<div className="card-body">

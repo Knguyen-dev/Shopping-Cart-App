@@ -1,28 +1,12 @@
 /*
 
-Games Endpoint: 
-id: 3498,
-		slug: "grand-theft-auto-v",
-		name: "Grand Theft Auto V",
-		released: "2013-09-17",
-		background_image:
-			"https://media.rawg.io/media/games/20a/20aa03a10cda45239fe22d035c0ebe64.jpg",
-		platforms: [
-			"PlayStation 5",
-			"Xbox Series S/X",
-			"PC",
-			"PlayStation 4",
-			"PlayStation 3",
-			"Xbox 360",
-			"Xbox One",
-		],
 */
 
 export const sampleGameData = [
 	{
 		id: 3498,
 		slug: "grand-theft-auto-v",
-		name: "Grand Theft Auto V",
+		name: "Grand Theft Auto V: Long Name Edition",
 		released: "2013-09-17",
 		background_image:
 			"https://media.rawg.io/media/games/20a/20aa03a10cda45239fe22d035c0ebe64.jpg",

@@ -1,4 +1,3 @@
-import PropTypes from "prop-types";
 import { useEffect, useState } from "react";
 import {
 	FaRegCalendarTimes,
@@ -10,7 +9,6 @@ import {
 	FaPuzzlePiece,
 	FaCarSide,
 	FaFootballBall,
-	FaCheck,
 } from "react-icons/fa";
 import { TbPlayerTrackNext } from "react-icons/tb";
 import { GoTrophy } from "react-icons/go";
@@ -19,192 +17,14 @@ import { LuSwords } from "react-icons/lu";
 import { FaGun } from "react-icons/fa6";
 import "../styles/BrowsingPage.css";
 
-import { datesModule } from "./utilities/utilities";
+import { createDateModule } from "./utilities/utilities";
 import GameCard from "./components/GameCard";
+import CustomDropDown from "./components/CustomDropDown";
+import SidebarSection from "./components/SidebarTab";
 import { PLATFORM_IDS, GENRE_IDS, fetchGames } from "./utilities/requests";
 
-function SidebarTab({ tabObj, onClick, isActive }) {
-	return (
-		<li className={`sidebar-tab ${isActive && "active-tab"}`} onClick={onClick}>
-			<div className="sidebar-tab-icon">{tabObj.icon}</div>
-			<span className="sidebar-tab-title">{tabObj.tabTitle}</span>
-		</li>
-	);
-}
-SidebarTab.propTypes = {
-	tabObj: PropTypes.object,
-	onClick: PropTypes.func,
-	isActive: PropTypes.bool,
-};
-
-// Creates a section on the sidebar
-function SidebarSection({
-	sectionObj,
-	setActiveTab,
-	activeTabID,
-	handleSearch,
-	dropDownParams,
-}) {
-	return (
-		<section className="sidebar-section">
-			<h2 className="sidebar-section-title">{sectionObj.sectionTitle}</h2>
-			<ul className="sidebar-tab-list">
-				{sectionObj.tabs.map((tabObj, index) => {
-					/*
-          - Map:
-          1. Create a unique id for each tabObj. 
-          2. Also create a boolean 
-            to indicate whether a tab is active by comparison the active tab id to 
-            a given tab's id, which we just generated.
-          - onTabClick:
-          1. Record the active tab for visually indicating what tab is being used.
-          2. Get search parameters for our clicked tab, and loop through the dropdown parameters.
-            If the tab is supposed to ignore the ordering drop down, ensure the "ordering"
-            parameter is skipped and not included in our newSearchParams
-
-
-          NOTE: 
-
-          1. For a section such as 'Top' where we show games ordered on some criteria,
-            the ordering set in the tab should take priority over the user's drop down ordering. 
-            As well as this the user shouldn't be able to interfere with the ordering of 
-            the tabs here due to the nature of the section. For that reason, if we see
-            a tab with ignoreOrderDropDown defined (which will always have the value true),
-            we will skip the 'ordering' parameter provided in 'dropDownParams' to prevent 
-            said parameter from either 'overwriting' or predefined 'ordering' parameter, 
-            or deleting it.
-
-          2. It should be noted that it seems without the 'ordering' parameter. Rawg api
-            automatically gives back the most popular games, so you can think of it as 
-            implicitly having "ordering='-added'" by default.
-          */
-					tabObj.id = `${sectionObj.sectionTitle}-${tabObj.tabTitle}-${index}`;
-					const isActive = activeTabID === tabObj.id ? true : false;
-					const onTabClick = () => {
-						const newSearchParams = { ...tabObj.searchParams };
-						for (const key in dropDownParams) {
-							if (tabObj.ignoreOrderDropDown && key === "ordering") {
-								continue;
-							} else if (dropDownParams[key]) {
-								newSearchParams[key] = dropDownParams[key];
-							} else {
-								delete newSearchParams[key];
-							}
-						}
-						setActiveTab(tabObj);
-						handleSearch(newSearchParams);
-					};
-
-					return (
-						<SidebarTab
-							key={index}
-							tabObj={tabObj}
-							onClick={onTabClick}
-							isActive={isActive}
-						/>
-					);
-				})}
-			</ul>
-		</section>
-	);
-}
-SidebarSection.propTypes = {
-	sectionObj: PropTypes.object,
-	setActiveTab: PropTypes.func,
-	activeTabID: PropTypes.string,
-	dropDownParams: PropTypes.object,
-	handleSearch: PropTypes.func,
-};
-
-/*
-+ Component for creating our custom dropdown
-- Parameters:
-1. dropDownOptions: An object that has information on how to build the drop down
-2. currentOption: A given object in dropDownOptions.options that details information on 
-    an object in the drop down
-3. setOption: State setter function that tracks the currently selected/active option in the drop down
-4. searchParams: The current search parameters being used to query games.
-5. handleSearch: The function used to query games when passed some searched parameters.
-
-- dropDownOptions.options.map: Here we iterate through the array of 
-  option objects to create the markup and logic for the functioning drop down items.
-
-- handleDropDownChange: When an item is selected in a drop down it, we 
-  may add, remove, or modify only the parameter that the drop down is responsible for, while
-  leaving all other parameters the same.
-1. Get our current search parameters with the searchParams object, but as a shallow copy.
-2. Iterate through every key-value pair in an option object's 'searchParams' object,
-    which is just a map containing the search parameters that will be applied when clicking
-    on that option. 
- 
-  - If the value exists, we will add or overwrite the current searchParam's parameter
-    with the new value.
-  - Else, the value doesn't exist (null), which us our way of letting the user deselect
-    any filter or option in the drop down. With this, we will just remove the drop down's 
-    parameter from our search parameters to ensure that it doesn't affect the final fetch.
-
-3. Finally set the state to represent the current drop down item being selected and then
-    make the fetch request with our new parameters.
-
-NOTE: In JavaScript shallow copying an object creates a new object with separate references
-      to the top-level keys and values only. Meaning changing these top-level key-value pairs don't 
-      affect the key-value pairs of the original. So for a simple map of that contains simple
-      primitive data types and no nesting, it won't directly affect our state value.
-*/
-function CustomDropDown({
-	dropDownOptions,
-	currentOption,
-	setOption,
-	searchParams,
-	handleSearch,
-}) {
-	return (
-		<div className="custom-drop-down dropdown">
-			<button
-				className="dropdown-toggle"
-				type="button"
-				data-bs-toggle="dropdown"
-				aria-expanded="false">
-				{dropDownOptions.dropDownTitle}:{" "}
-				<strong>{currentOption.optionTitle}</strong>
-			</button>
-			<ul className="dropdown-menu">
-				{dropDownOptions.options.map((optionObj, index) => {
-					const handleDropDownChange = () => {
-						const newSearchParams = { ...searchParams };
-						for (const key in optionObj.searchParams) {
-							if (optionObj.searchParams[key]) {
-								newSearchParams[key] = optionObj.searchParams[key];
-							} else {
-								delete newSearchParams[key];
-							}
-						}
-						setOption(optionObj);
-						handleSearch(newSearchParams);
-					};
-
-					return (
-						<li key={index}>
-							<span className="dropdown-item" onClick={handleDropDownChange}>
-								{optionObj.optionTitle}{" "}
-								{currentOption.optionTitle === optionObj.optionTitle && (
-									<FaCheck />
-								)}
-							</span>
-						</li>
-					);
-				})}
-			</ul>
-		</div>
-	);
-}
-CustomDropDown.propTypes = {
-	dropDownOptions: PropTypes.object,
-	currentOption: PropTypes.object,
-	setOption: PropTypes.func,
-	searchParams: PropTypes.object,
-	handleSearch: PropTypes.func,
-};
+// Initialize dateModule so some of our date reliant tabs can use it
+const dateModule = createDateModule();
 
 export default function BrowsingPage() {
 	/*
@@ -235,29 +55,14 @@ export default function BrowsingPage() {
 
 	/*
   + Effect that sets the default active tab and item ordering,
-
   - Setting up visual indicators
   1. Let's define our default item order, tab, and platform.
   2. Now to we set the states so that we visually indicate the current values
     on our sidebar and on our drop downs.
-
   - Fetching data correctly: 
-  1. Based on the tab we picked as our default, we must carefully 
-    build our search parameters for fetch. We picked the top tab which means our 
-    search parameters are the ones defined in the tab object, and potential 
-    parameter for the platform dropdown. Remember for 'Top' section, we 
-    excluded any parameter from the ordering drop down.
-  2. We also have 'All' the default platform, meaning any platform is allowed,
-    so to indicate that we actually don't include the "parent_platform" parameter.
-    Now we call handleSearch, and pass in our search parameters as a map.
-
-
-  - NOTE: 
-  
   1. Settings the states on itemOrder, platform, and activeTab here will only change
     the page visually and not effect the results of our handleSearch call. The
     handle search call is solely reliant on what was passed in here.
-
   2. If the default drop down values are 'All' or 'None' for your platforms and ordering
     drop downs, don't include them as search params in your handleSearch call because 
     their values will be null. In any case, when your platform's search params isn't null
@@ -265,9 +70,6 @@ export default function BrowsingPage() {
     And for the ordering drop down, you can't include it's params when the default 
     tab is 'Top' since their parameters for 'ordering' will conflict and remove
     whatever ordering parameter you set for the tabs in top.
-
-  3. 
-
   */
 	useEffect(() => {
 		const defaultTab = sidebarSections[1].tabs[0];
@@ -276,7 +78,6 @@ export default function BrowsingPage() {
 		setItemOrder(defaultItemOrder);
 		setPlatform(defaultPlatform);
 		setActiveTab(defaultTab);
-
 		handleSearch({
 			...defaultTab.searchParams,
 		});
@@ -340,6 +141,50 @@ export default function BrowsingPage() {
 		}
 	};
 
+	/*
+  + Function for clicking a sidebar tab
+  1. Start parameters off with parameters defined in sidebar
+  2. Add parameter set by 'platform' drop down
+  3. If the order drop down isn't ignored, add its parameter as well
+  4. Set our active tab and do a fetch for the games
+  */
+	const onTabClick = (tabObj) => {
+		let newSearchParams = { ...tabObj.searchParams };
+		const dropDownParams = {
+			...platform.searchParams,
+			...itemOrder.searchParams,
+		};
+		for (const param in dropDownParams) {
+			if (dropDownParams[param]) {
+				newSearchParams[param] = dropDownParams[param];
+			} else {
+				delete newSearchParams[param];
+			}
+		}
+		setActiveTab(tabObj);
+		handleSearch(newSearchParams);
+	};
+
+	/*
+  + Function for clicking a drop down item
+  1. Let our current search parameters be the foundation of the new query
+  2. For every parameter a dropdown controls, if the value exists we rewrite it 
+     into our new query, else it's null so we remove it since that's our 
+     mechanism for removing a parameter.
+  */
+	const handleDropDownChange = (optionObj, setOption) => {
+		const newSearchParams = { ...searchParams };
+		for (const param in optionObj.searchParams) {
+			if (optionObj.searchParams[param]) {
+				newSearchParams[param] = optionObj.searchParams[param];
+			} else {
+				delete newSearchParams[param];
+			}
+		}
+		setOption(optionObj);
+		handleSearch(newSearchParams);
+	};
+
 	// Sections and tabs in the sidebar
 	const sidebarSections = [
 		{
@@ -349,21 +194,21 @@ export default function BrowsingPage() {
 					tabTitle: "Last 30 days",
 					icon: <FaStar />,
 					searchParams: {
-						dates: datesModule.lastThirtyDaysStr,
+						dates: dateModule.lastThirtyDaysStr,
 					},
 				},
 				{
 					tabTitle: "This week",
 					icon: <FaRegCalendarTimes />,
 					searchParams: {
-						dates: datesModule.thisWeekStr,
+						dates: dateModule.thisWeekStr,
 					},
 				},
 				{
 					tabTitle: "Upcoming",
 					icon: <TbPlayerTrackNext />,
 					searchParams: {
-						dates: datesModule.nextYearStr,
+						dates: dateModule.nextYearStr,
 					},
 				},
 			],
@@ -375,17 +220,15 @@ export default function BrowsingPage() {
 					tabTitle: "Best of the year",
 					icon: <GoTrophy />,
 					searchParams: {
-						dates: `${datesModule.year}-01-01,${datesModule.todayStr}`,
+						dates: `${dateModule.year}-01-01,${dateModule.todayStr}`,
 					},
 					ignoreOrderDropDown: true,
 				},
 				{
-					tabTitle: `Popular in ${datesModule.year - 1}`,
+					tabTitle: `Popular in ${dateModule.year - 1}`,
 					icon: <BsGraphUpArrow />,
 					searchParams: {
-						dates: `${datesModule.year - 1}-01-01,${
-							datesModule.year - 1
-						}-12-31`,
+						dates: `${dateModule.year - 1}-01-01,${dateModule.year - 1}-12-31`,
 						ordering: "-added",
 					},
 					ignoreOrderDropDown: true,
@@ -545,13 +388,8 @@ export default function BrowsingPage() {
 					<SidebarSection
 						key={`${sectionObj.sectionTitle}-${index}`}
 						sectionObj={sectionObj}
-						setActiveTab={setActiveTab}
 						activeTabID={activeTab.id}
-						handleSearch={handleSearch}
-						dropDownParams={{
-							...itemOrder.searchParams,
-							...platform.searchParams,
-						}}
+						onTabClick={onTabClick}
 					/>
 				))}
 			</div>
@@ -571,16 +409,14 @@ export default function BrowsingPage() {
 								dropDownOptions={orderingOptions}
 								currentOption={itemOrder}
 								setOption={setItemOrder}
-								searchParams={searchParams}
-								handleSearch={handleSearch}
+								handleDropDownChange={handleDropDownChange}
 							/>
 						)}
 						<CustomDropDown
 							dropDownOptions={platformOptions}
 							currentOption={platform}
 							setOption={setPlatform}
-							searchParams={searchParams}
-							handleSearch={handleSearch}
+							handleDropDownChange={handleDropDownChange}
 						/>
 					</div>
 				</header>

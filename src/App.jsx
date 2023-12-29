@@ -13,6 +13,7 @@ import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
 import HomePage from "./pages/HomePage";
 import BrowsingPage from "./pages/BrowsePage";
+import GameDetailsPage from "./pages/GameDetailsPage";
 
 import "./App.css";
 const appRouter = createBrowserRouter(
@@ -21,7 +22,11 @@ const appRouter = createBrowserRouter(
 			<Route path="" element={<AppLayout />}>
 				<Route index element={<HomePage />} />
 
-				<Route path="browse" element={<BrowsingPage />} />
+				<Route path="browse">
+					<Route index element={<BrowsingPage />} />
+
+					<Route path=":slug" element={<GameDetailsPage />} />
+				</Route>
 			</Route>
 			<Route path="auth" element={<AuthLayout />}>
 				<Route path="login" element={<LoginPage />} />
