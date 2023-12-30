@@ -1,0 +1,10 @@
+.not-found-page {
+	background-image: url("../assets/images/night_background.jpg");
+	background-size: cover;
+	background-position: center;
+	background-attachment: fixed;
+	position: relative;
+	height: 100vh;
+	color: white;
+	text-align: center;
+}

@@ -115,7 +115,7 @@ export async function fetchGames(params = {}) {
 + Data we want:
 
 1. Name
-2. Description 
+2. Description:  
 3. website 
 4. release date
 5. list of genres
@@ -131,32 +131,86 @@ export async function fetchGames(params = {}) {
   have to pass in stuff as well if possible.
 
 */
-function processGameDetails(gameData) {
-	const { name, description, released } = gameData;
+export function processGameDetails(gameData) {
+	const gameDetails = {
+		name: gameData.name,
+		description: gameData.description_raw
+			? gameData.description_raw
+			: "No Description",
+		website: gameData.website,
+		developers: gameData.developers
+			? gameData.developers.map((devObj) => devObj.name)
+			: [],
+		publishers: gameData.publishers
+			? gameData.publishers.map((publisherObj) => publisherObj.name)
+			: [],
+		genres: gameData.genres
+			? gameData.genres.map((genreObj) => genreObj.name)
+			: [],
+		background_image: gameData.background_image
+			? gameData.background_image
+			: notFoundImg,
+		platforms: gameData.parent_platforms
+			? gameData.parent_platforms.map(
+					(platformObj) => platformObj.platform.name
+				)
+			: [],
+		price: "$10",
+	};
+	return gameDetails;
 }
 
 /*
-+ Makes a fetch for the details of a single game
++ Makes a fetch for the details of a single game, will return an object with the game's info
 - gameID: The integer ID or the slug that identifies the game 
   for Rawg api.
-
 Request url: https://api.rawg.io/api/games/grand-theft-auto-v?key=79e2d19924d040afa2644aa5867a40f4
 */
 export async function fetchGameDetails(gameID) {
-	// Rawg api endpoint info
 	const requestURL = `${baseURL}/${gameID}?key=${apiKey}`;
-
 	try {
 		const response = await fetch(requestURL, {
 			mode: "cors",
 		});
-
 		if (!response.ok) {
 			throw response;
 		}
-
 		const jsonData = await response.json();
-		console.log(jsonData);
+
+		console.log("Details Request: ", requestURL);
+		return processGameDetails(jsonData);
+	} catch (error) {
+		console.error("Error in fetching game details: ", error);
+		throw error;
+	}
+}
+
+/*
++  processGameImages(gameData): Accepts screenShots, which will be an array of screenshot objects,
+  and returns an array of the sources to those screenshots.
+
++ fetchGameImages(gameID): Accepts an id , and fetches the screenshots for a game, and returns a list of 
+  those screenshots.
+
+NOTE: These screenshots do not include the cover image of the game.
+*/
+
+export function processGameImages(screenShots) {
+	return screenShots.map((imgObj) => imgObj.image);
+}
+
+export async function fetchGameImages(gameID) {
+	const requestURL = `${baseURL}/${gameID}/screenshots?key=${apiKey}`;
+	try {
+		const response = await fetch(requestURL, {
+			mode: "cors",
+		});
+		if (!response.ok) {
+			throw response;
+		}
+		const jsonData = await response.json();
+
+		return processGameImages(jsonData.results);
 	} catch (error) {
 		console.error("Error in fetching game details: ", error);
 		throw error;

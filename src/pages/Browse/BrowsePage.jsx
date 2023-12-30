@@ -15,13 +15,13 @@ import { GoTrophy } from "react-icons/go";
 import { BsGraphUpArrow } from "react-icons/bs";
 import { LuSwords } from "react-icons/lu";
 import { FaGun } from "react-icons/fa6";
-import "../styles/BrowsingPage.css";
+import "../../styles/BrowsingPage.css";
 
-import { createDateModule } from "./utilities/utilities";
-import GameCard from "./components/GameCard";
-import CustomDropDown from "./components/CustomDropDown";
-import SidebarSection from "./components/SidebarTab";
-import { PLATFORM_IDS, GENRE_IDS, fetchGames } from "./utilities/requests";
+import { createDateModule } from "../utilities/utilities";
+import GameCard from "../../components/GameCard";
+import CustomDropDown from "../../components/CustomDropDown";
+import SidebarSection from "../../components/SidebarTab";
+import { PLATFORM_IDS, GENRE_IDS, fetchGames } from "../utilities/requests";
 
 // Initialize dateModule so some of our date reliant tabs can use it
 const dateModule = createDateModule();

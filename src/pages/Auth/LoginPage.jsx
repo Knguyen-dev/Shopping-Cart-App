@@ -1,6 +1,4 @@
-// import FloatingInput from "./components/FloatingInput";
-
-import LoginForm from "./components/LoginForm";
+import LoginForm from "../../components/LoginForm";
 import { NavLink } from "react-router-dom";
 export default function LoginPage() {
 	return (

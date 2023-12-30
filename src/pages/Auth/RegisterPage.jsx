@@ -1,5 +1,5 @@
 import { NavLink } from "react-router-dom";
-import RegisterForm from "./components/RegisterForm";
+import RegisterForm from "../../components/RegisterForm";
 
 export default function RegisterPage() {
 	return (

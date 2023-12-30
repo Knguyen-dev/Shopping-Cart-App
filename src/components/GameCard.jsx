@@ -8,7 +8,8 @@ import {
 } from "react-icons/fa";
 import { BsNintendoSwitch } from "react-icons/bs";
 
-import "../../styles/GameCard.css";
+import { useNavigate } from "react-router-dom";
+import "../styles/GameCard.css";
 
 // Card for games
 import PropTypes from "prop-types";
@@ -53,6 +54,8 @@ const icon_map = {
 };
 
 export default function GameCard({ gameObj }) {
+	const navigate = useNavigate();
+
 	/*
   - Create a set of platform names that contains any platform name that we 
     can render an icon for. 
@@ -67,6 +70,17 @@ export default function GameCard({ gameObj }) {
   of a game being on the "PlayStation 4" and "PlayStation 5". We don't want
   to render an icon for both.
   */
+
+	/*
+  + Routes user to GameDetailsPage.
+  1. we set up browse/:slug route in App.jsx
+  2. cards are rendered in "browse" route, so this should 
+    directly take user to browse/some_slug
+  */
+	const handleCardClick = () => {
+		navigate(gameObj.slug);
+	};
+
 	let platformNames = new Set();
 	gameObj.platforms.forEach((platform) => {
 		platform = platform.toLowerCase();
@@ -86,17 +100,15 @@ export default function GameCard({ gameObj }) {
 	const platformIcons = [...platformNames].map((name) => icon_map[name]);
 
 	return (
-		<div className="game-card">
+		<div className="game-card" onClick={handleCardClick}>
 			<div className="card-img-container">
 				<img src={gameObj.background_image} alt="Game Cover Image" />
 			</div>
-
 			<div className="card-body">
 				<div className="header-info">
 					<button className="add-cart-btn">Add to Cart</button>
 					<span className="game-price">{gameObj.price}</span>
 				</div>
-
 				<ul className="platform-icon-list">
 					{platformIcons.map((icon, index) => (
 						<li key={index}>{icon}</li>

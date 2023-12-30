@@ -1,0 +1,59 @@
+.game-details-page {
+	background-color: var(--bg-primary-dark);
+	@apply tw-px-12 tw-py-4 tw-text-white;
+}
+
+.game-details-header {
+	@apply tw-mb-4 tw-flex tw-items-center tw-justify-between tw-font-bold;
+}
+
+.game-details-main {
+	grid-template-columns: 70% 1fr;
+	@apply tw-grid tw-gap-x-4;
+}
+
+.game-details-sidebar {
+	@apply tw-flex tw-flex-col tw-gap-y-8;
+}
+
+.game-info {
+	color: rgb(204, 204, 204);
+}
+
+.game-info-top {
+	max-height: 300px;
+	background: linear-gradient(
+		90deg,
+		rgba(26, 26, 26, 0) 0%,
+		rgb(26, 26, 26) 100%
+	);
+	@apply tw-overflow-auto tw-rounded-t-lg tw-p-5 tw-leading-5;
+}
+
+/* 
+- Make the collapsible section a grid. Then when it's open
+  we make the rows 1fr. Then make the flow div, our div that 
+  wraps the content of our collapsible section, overflow hidden.
+*/
+.game-info-bottom {
+	display: grid;
+	grid-template-rows: 0fr;
+	background: linear-gradient(
+		90deg,
+		rgba(38, 38, 38, 0) 0%,
+		rgb(38, 38, 38) 100%
+	);
+	@apply tw-rounded-b-lg tw-p-5 tw-transition-all;
+}
+
+.game-info-bottom.open {
+	grid-template-rows: 1fr;
+}
+
+.game-info-bottom button {
+	@apply tw-ml-auto tw-flex tw-items-center tw-gap-x-2 tw-text-lg;
+}
+
+.flow-div {
+	@apply tw-overflow-hidden;
+}

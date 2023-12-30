@@ -1,5 +1,5 @@
 import { NavLink, Outlet } from "react-router-dom";
-import "../../styles/AppLayout.css";
+import "../styles/AppLayout.css";
 
 function Navbar() {
 	return (
@@ -58,7 +58,9 @@ export default function AppLayout() {
 	return (
 		<div id="app-layout">
 			<Header />
-			<main id="app-main" className="tw-bg-neutral-900">
+			<main
+				id="app-main"
+				className="tw-relative tw-bg-neutral-900 tw-text-white">
 				<Outlet />
 			</main>
 			<Footer />

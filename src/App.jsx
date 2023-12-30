@@ -6,14 +6,15 @@ import {
 } from "react-router-dom";
 
 // Layouts
-import AppLayout from "./pages/layouts/AppLayout";
-import AuthLayout from "./pages/layouts/AuthLayout";
+import AppLayout from "./layouts/AppLayout";
+import AuthLayout from "./layouts/AuthLayout";
 // Pages
-import LoginPage from "./pages/LoginPage";
-import RegisterPage from "./pages/RegisterPage";
+import LoginPage from "./pages/Auth/LoginPage";
+import RegisterPage from "./pages/Auth/RegisterPage";
 import HomePage from "./pages/HomePage";
-import BrowsingPage from "./pages/BrowsePage";
-import GameDetailsPage from "./pages/GameDetailsPage";
+import BrowsingPage from "./pages/Browse/BrowsePage";
+import GameDetailsPage from "./pages/Browse/GameDetailsPage";
+import NotFoundPage from "./pages/NotFoundPage";
 
 import "./App.css";
 const appRouter = createBrowserRouter(
@@ -32,6 +33,8 @@ const appRouter = createBrowserRouter(
 				<Route path="login" element={<LoginPage />} />
 				<Route path="register" element={<RegisterPage />} />
 			</Route>
+
+			<Route path="*" element={<NotFoundPage />} />
 		</Route>
 	)
 );

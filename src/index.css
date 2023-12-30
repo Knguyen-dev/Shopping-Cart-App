@@ -9,6 +9,32 @@
 	box-sizing: border-box;
 }
 
+@font-face {
+	font-family: GT Walsheim Pro;
+	src:
+		local("GT Walsheim Pro Regular"),
+		local("GTWalsheimProRegular"),
+		url("./assets/fonts/GTWalsheimPro/GTWalsheimProRegular.woff2")
+			format("woff2"),
+		url("./assets/fonts/GTWalsheimPro/GTWalsheimProRegular.woff") format("woff"),
+		url("./assets/fonts/GTWalsheimPro/GTWalsheimProRegular.ttf")
+			format("truetype");
+	font-weight: 400;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: GT Walsheim Pro;
+	src:
+		local("GT Walsheim Pro Bold"),
+		local("GTWalsheimProBold"),
+		url(GTWalsheimProBold.woff2) format("woff2"),
+		url("./assets/fonts/GTWalsheimPro/GTWalsheimProBold.woff") format("woff"),
+		url("./assets/fonts/GTWalsheimPro/GTWalsheimProBold.ttf") format("truetype");
+	font-weight: 700;
+	font-style: normal;
+}
+
 :root {
 	font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
 
@@ -25,7 +51,10 @@
 }
 
 a {
-	text-decoration: inherit;
+	text-decoration: underline;
+}
+nav a {
+	text-decoration: none;
 }
 
 a:hover {
@@ -52,4 +81,15 @@ a:hover {
 	background-color: #a493a9;
 	border-radius: 10px;
 	border: 3px solid #ffffff;
+}
+
+body {
+	font-family: "GT Walsheim Pro";
+}
+
+.position-centered {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
 }

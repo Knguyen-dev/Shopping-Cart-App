@@ -1,6 +1,6 @@
 import { describe, it, expect } from "vitest";
 import { render, screen } from "@testing-library/react";
-import GameCard from "../components/GameCard";
+import GameCard from "../../components/GameCard";
 describe("GameCard Component", () => {
 	const gameObj = {
 		id: 3498,

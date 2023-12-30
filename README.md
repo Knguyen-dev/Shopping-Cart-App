@@ -2,17 +2,19 @@
 
 /*
 - BOOK MARK: 
-1. Next we should set up some tests to practice what we've learned for testing in javascript and react. 
-  Also to make sure everything works of cse
 
-- Sometimes for games with long titles, the title doesn't fit on the card, 
-  so we need to refine css.
+
+- Give the error message for game details a link back to the browsing page
+- Create a catch all route 
+
+1. Set up back button, the user clicks on a card, and wants to go back to the 
+  browsing page, they should return to where they left off.
+
 
 
 
 
 2. Set up our search button to work.
-3. Set up the template for the game page and dynamic segments using slugs we 
 4. Set up shopping cart page and somehow link it to the browsing page. Here we
   are required to have a badge that indicates the amount of stuff in cart.
 5. Set up user page and protected routes. Also should set up smart redirects as well.

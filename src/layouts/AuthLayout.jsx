@@ -1,6 +1,6 @@
 import { Footer } from "./AppLayout";
 import { Outlet } from "react-router";
-import "../../styles/AuthLayout.css";
+import "../styles/AuthLayout.css";
 
 export default function AuthLayout() {
 	return (
