@@ -4,11 +4,9 @@
 - BOOK MARK: 
 
 
-- Give the error message for game details a link back to the browsing page
-- Create a catch all route 
+1. Back button has been set up. We should at least try to control it a little.
+  Try to make it so that the link in the nav loads the game with default settings.
 
-1. Set up back button, the user clicks on a card, and wants to go back to the 
-  browsing page, they should return to where they left off.
 
 
 

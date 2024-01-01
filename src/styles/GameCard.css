@@ -7,9 +7,7 @@
 */
 /* 
 - We want the cards to take 100% of their column defined by the 
-  grid. However, the min-height of the cards will be 300px, except in the case
-  where the content, the title in this case, is longer. In that case the cards
-  with the longer title will be taller. 
+  grid. Set a max height to avoid avoids going over a certain limit.
 
   NOTE: With this not all of the cards will be the same uniform height, but 
   at least the content will be comfortably visible.
@@ -17,7 +15,7 @@
 */
 .game-card {
 	width: 100%;
-	height: minmax(300px, auto);
+	max-height: 350px;
 	background-color: var(--bg-secondary-dark);
 	@apply tw-flex tw-cursor-pointer tw-flex-col tw-overflow-hidden tw-rounded-lg tw-text-white tw-transition-all;
 }

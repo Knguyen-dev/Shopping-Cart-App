@@ -45,12 +45,11 @@
 	display: grid;
 	grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
 	overflow-y: scroll;
-	color: white;
 	@apply tw-gap-y-2 sm:tw-sticky sm:tw-top-0 sm:tw-flex sm:tw-h-screen sm:tw-flex-col;
 }
 
 .toggle-sidebar-btn {
-	@apply tw-fixed tw-bottom-5 tw-right-5 tw-z-20 tw-rounded-full tw-bg-white tw-p-3 sm:tw-hidden;
+	@apply tw-fixed tw-bottom-5 tw-right-5 tw-z-20 tw-rounded-full tw-bg-white tw-p-3 tw-text-black sm:tw-hidden;
 }
 
 .sidebar-section-title {

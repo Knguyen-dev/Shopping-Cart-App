@@ -1,7 +1,13 @@
+/* 
+
+height: 100%; carousel takes full height on our larger screens, but min-height 
+  allows carousel to be visible on smaller screens.
+*/
 .carousel {
 	position: relative;
 	overflow: hidden;
 	height: 100%;
+	min-height: 300px;
 	@apply tw-rounded-md;
 }
 

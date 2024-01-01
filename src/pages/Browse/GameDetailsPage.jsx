@@ -1,21 +1,17 @@
-import { NavLink, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { fetchGameDetails, fetchGameImages } from "../utilities/requests";
 import Carousel from "../../components/Carousel";
 import "../../styles/GameDetailsPage.css";
 
 import notFoundImg from "../../assets/images/image-not-found.png";
-import { FaChevronUp, FaChevronDown } from "react-icons/fa";
+import { FaChevronUp, FaChevronDown, FaArrowLeft } from "react-icons/fa";
 import { IoIosAdd } from "react-icons/io";
 
 /*
-- BOOK MARK: Cases we still need to deal with 
 
-
-1.
-2.
-3.
-4.
+1. Once back button is done, we will probably have an idea on how to handle searching
+  no matter where the user is in the app.
 
 */
 
@@ -24,7 +20,6 @@ const useGameData = (slug) => {
 	const [gameDetailsError, setGameDetailsError] = useState(false);
 	const [gameImages, setGameImages] = useState();
 	const [gameImagesError, setGameImagesError] = useState(false);
-
 	useEffect(() => {
 		const getGameInfo = () => {
 			// Fetches game details
@@ -57,6 +52,7 @@ export default function GameDetailsPage() {
 	const { gameDetails, gameDetailsError, gameImages, gameImagesError } =
 		useGameData(slug);
 	const [isExpanded, setIsExpanded] = useState(false);
+	const navigate = useNavigate();
 
 	/*
   + Generates markup for list data such as platforms, developers, and 
@@ -80,13 +76,22 @@ export default function GameDetailsPage() {
 		);
 	};
 
+	const handleBackBtnClick = () => {
+		navigate("/browse");
+	};
+
 	return (
 		<div className="game-details-page">
-			<header className="game-details-header">
-				<NavLink className="tw-text-xl" to="/browse">
-					Back To Harbor
-				</NavLink>
-				<h1 className="tw-text-5xl">{gameDetails && gameDetails.name}</h1>
+			<header className="game-details-header tw-mb-3">
+				<button
+					onClick={handleBackBtnClick}
+					className="tw-flex tw-items-center tw-gap-x-2">
+					<FaArrowLeft />
+					<span className="tw-text-xl">Back to Harbor</span>
+				</button>
+				<h1 className="tw-text-3xl md:tw-text-5xl">
+					{gameDetails && gameDetails.name}
+				</h1>
 			</header>
 			<main className="game-details-main">
 				{gameDetails && gameImages ? (
@@ -163,9 +168,11 @@ export default function GameDetailsPage() {
 						<p>Oops! Error getting game details or its images!</p>
 						<p>
 							Try again later or go back to{" "}
-							<NavLink className="tw-text-underline" to="/browse">
+							<span
+								className="tw-cursor-pointer tw-underline"
+								onClick={() => navigate("/browse")}>
 								browsing page
-							</NavLink>
+							</span>
 						</p>
 					</div>
 				) : (

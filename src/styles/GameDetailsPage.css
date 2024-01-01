@@ -4,16 +4,21 @@
 }
 
 .game-details-header {
-	@apply tw-mb-4 tw-flex tw-items-center tw-justify-between tw-font-bold;
+	@apply tw-flex tw-flex-col tw-items-center tw-justify-between tw-font-bold md:tw-flex-row;
 }
 
 .game-details-main {
-	grid-template-columns: 70% 1fr;
-	@apply tw-grid tw-gap-x-4;
+	@apply tw-flex tw-flex-col tw-gap-4 md:tw-flex-row;
+}
+
+.game-image-section {
+	flex-basis: 70%;
 }
 
 .game-details-sidebar {
-	@apply tw-flex tw-flex-col tw-gap-y-8;
+	flex-basis: 30%;
+	min-width: 300px;
+	@apply tw-flex tw-flex-shrink-0 tw-flex-col-reverse tw-gap-y-4 md:tw-flex-col;
 }
 
 .game-info {

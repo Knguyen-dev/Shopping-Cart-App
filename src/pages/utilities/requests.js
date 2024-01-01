@@ -6,30 +6,7 @@
 */
 
 import notFoundImg from "../../assets/images/image-not-found.png";
-export const PLATFORM_IDS = {
-	PC: 1,
-	PlayStation: 2,
-	Xbox: 3,
-	IOS: 4,
-	MacOS: 5,
-	Nintendo: 7,
-	Android: 8,
-};
-
-export const GENRE_IDS = {
-	Action: 4,
-	Adventure: 3,
-	RPG: 5,
-	Strategy: 10,
-	Shooter: 2,
-	Puzzle: 7,
-	Racing: 1,
-	Sports: 15,
-};
-
-// Rawg api endpoint info
-const apiKey = "79e2d19924d040afa2644aa5867a40f4";
-const baseURL = "https://api.rawg.io/api/games";
+import { apiKey, baseURL } from "./constants";
 
 /*
 	+ Parses data from game objects and only gives us the data that we want to use.
@@ -37,7 +14,6 @@ const baseURL = "https://api.rawg.io/api/games";
   fake prices right here. We'll make all the prices the same since it would 
   create some inconsistencies if we try to randomly generate prices, and 
   there could be multiple different prices for the same game.
-
 
   - Properties that could be null:
   1. background_image
@@ -73,6 +49,10 @@ export function processGames(gameList) {
 + Makes a fetch for multiple games:
 - params: An object in form {searchParameter: searchValue}. By default
   it'll fetch 12 games
+
+
+
+  sample url: https://api.rawg.io/api/games?key=79e2d19924d040afa2644aa5867a40f4&search="No Man's Sky"
 */
 export async function fetchGames(params = {}) {
 	// Have some default parameters that
@@ -92,6 +72,7 @@ export async function fetchGames(params = {}) {
 		requestURL += `&${param}=${defaultParams[param]}`;
 	}
 
+	console.log("Request URL: ", requestURL);
 	// Make our fetch request
 	try {
 		const response = await fetch(requestURL, { mode: "cors" });
