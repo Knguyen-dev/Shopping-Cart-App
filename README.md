@@ -3,16 +3,9 @@
 /*
 - BOOK MARK: 
 
+3. Test out shopping cart in a test file. When it's good, implement 
+  our CartProvider.
 
-1. Back button has been set up. We should at least try to control it a little.
-  Try to make it so that the link in the nav loads the game with default settings.
-
-
-
-
-
-
-2. Set up our search button to work.
 4. Set up shopping cart page and somehow link it to the browsing page. Here we
   are required to have a badge that indicates the amount of stuff in cart.
 5. Set up user page and protected routes. Also should set up smart redirects as well.

@@ -282,3 +282,10 @@ export const baseURL = "https://api.rawg.io/api/games";
 
 // Small breakpoint for screens (in pixels)
 export const SMALL_BREAKPOINT = 640;
+
+export const CART_ACTIONS = {
+	addToCart: "ADD_TO_CART",
+	removeFromCart: "REMOVE_FROM_CART",
+	setQuantity: "SET_QUANTITY",
+	getQuantity: "GET_QUANTITY",
+};

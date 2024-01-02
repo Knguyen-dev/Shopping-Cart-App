@@ -36,7 +36,14 @@
 }
 
 :root {
-	font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+	font-family:
+		GT Walsheim Pro,
+		Inter,
+		system-ui,
+		Avenir,
+		Helvetica,
+		Arial,
+		sans-serif;
 
 	font-synthesis: none;
 	text-rendering: optimizeLegibility;
@@ -84,7 +91,7 @@ a:hover {
 }
 
 body {
-	font-family: "GT Walsheim Pro";
+	font-family: var(--font-family);
 }
 
 .position-centered {

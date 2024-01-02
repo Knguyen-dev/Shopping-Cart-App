@@ -29,11 +29,30 @@ export default function BrowsingPage({
 	const [sidebarHidden, setSidebarHidden] = useState(false);
 	const navigate = useNavigate();
 
+	/*
+  + Handles when we want apply default settings to the BrowsePage, which 
+    will load the BrowsePage in its initial state as a result.
+
+  - Cases where we load initial browse page:
+  1. When it's the first time the user is visiting the browse page,
+    and they didn't get redirected by our search bar.
+
+  - Cases where we don't load initial browse page:
+  1. For every subsequent visit to the browse page really.
+
+  NOTE: So when useDefault changes, we run this effect. This 
+    helps prevent the issue of updating the App component while 
+    rendering our BrowsePage (caused by handleSubmitSearch). So when
+    useDefault changes and we're redirected to BrowsePage, we defer
+    the execution of this function until after BrowsePage is done. 
+    So any state changes as a result of loadInitialBrowsePage will be 
+    done after BrowsePage is done rendering. 
+  */
 	useEffect(() => {
 		if (useDefault) {
 			loadInitialBrowsePage();
 		}
-	}, []);
+	}, [useDefault, loadInitialBrowsePage]);
 
 	// Handles resizing of our sidebar when coming from below small breakpoint and going above it.
 	useEffect(() => {
@@ -136,4 +155,5 @@ BrowsingPage.propTypes = {
 	loadInitialBrowsePage: PropTypes.func,
 	onTabClick: PropTypes.func,
 	handleDropDownChange: PropTypes.func,
+	cartItems: PropTypes.array,
 };

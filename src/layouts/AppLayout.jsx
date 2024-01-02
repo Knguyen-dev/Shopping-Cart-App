@@ -34,8 +34,9 @@ function Navbar({ handleSubmitSearch }) {
 
 			<form
 				className="input-group"
-				onSubmit={() => {
-					handleSubmitSearch();
+				onSubmit={(e) => {
+					e.preventDefault();
+					handleSubmitSearch(inputValue);
 					navigate("/browse");
 				}}>
 				<input
