@@ -1,10 +1,3 @@
-/*
-+ PLATFORM_IDS: An object with the name of the parent platform
-  and the ID that rawg api uses to identify them.
-+ GENRE_IDS: Object with name of the game genre and 
-  the ID that rawg api uses to identify them.
-*/
-
 import notFoundImg from "../../assets/images/image-not-found.png";
 import { apiKey, baseURL } from "./constants";
 
@@ -39,7 +32,9 @@ export function processGames(gameList) {
 			platforms: gameObj.platforms
 				? gameObj.platforms.map((platformObj) => platformObj.platform.name)
 				: [],
-			price: "$10",
+
+			// Pretend Price in dollars
+			price: 10,
 		};
 	});
 	return gameData;
@@ -49,30 +44,22 @@ export function processGames(gameList) {
 + Makes a fetch for multiple games:
 - params: An object in form {searchParameter: searchValue}. By default
   it'll fetch 12 games
-
-
-
-  sample url: https://api.rawg.io/api/games?key=79e2d19924d040afa2644aa5867a40f4&search="No Man's Sky"
 */
 export async function fetchGames(params = {}) {
 	// Have some default parameters that
 	const defaultParams = {
 		page_size: 12,
 	};
-
 	// Now add passed parameters to the default parameters to create our
 	// map of parameters we'll use ot query
 	for (const key in params) {
 		defaultParams[key] = params[key];
 	}
-
 	// Iteratively build the search url
 	let requestURL = `${baseURL}?key=${apiKey}`;
 	for (const param in defaultParams) {
 		requestURL += `&${param}=${defaultParams[param]}`;
 	}
-
-	console.log("Request URL: ", requestURL);
 	// Make our fetch request
 	try {
 		const response = await fetch(requestURL, { mode: "cors" });
@@ -137,7 +124,7 @@ export function processGameDetails(gameData) {
 					(platformObj) => platformObj.platform.name
 				)
 			: [],
-		price: "$10",
+		price: 10,
 	};
 	return gameDetails;
 }
@@ -158,8 +145,6 @@ export async function fetchGameDetails(gameID) {
 			throw response;
 		}
 		const jsonData = await response.json();
-
-		console.log("Details Request: ", requestURL);
 		return processGameDetails(jsonData);
 	} catch (error) {
 		console.error("Error in fetching game details: ", error);
@@ -170,10 +155,8 @@ export async function fetchGameDetails(gameID) {
 /*
 +  processGameImages(gameData): Accepts screenShots, which will be an array of screenshot objects,
   and returns an array of the sources to those screenshots.
-
 + fetchGameImages(gameID): Accepts an id , and fetches the screenshots for a game, and returns a list of 
   those screenshots.
-
 NOTE: These screenshots do not include the cover image of the game.
 */
 
@@ -191,7 +174,6 @@ export async function fetchGameImages(gameID) {
 			throw response;
 		}
 		const jsonData = await response.json();
-
 		return processGameImages(jsonData.results);
 	} catch (error) {
 		console.error("Error in fetching game details: ", error);

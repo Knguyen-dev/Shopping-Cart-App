@@ -76,6 +76,7 @@ export default function BrowsingPage({
 
 	return (
 		<div className="browsing-page">
+			{/* Sidebar */}
 			<div className={`browsing-sidebar ${sidebarHidden ? "tw-hidden" : ""}`}>
 				{sidebarSections.map((sectionObj, index) => (
 					<SidebarSection
@@ -87,13 +88,16 @@ export default function BrowsingPage({
 				))}
 			</div>
 
+			{/* Toggle sidebar button for mobile screens */}
 			<button
 				className="toggle-sidebar-btn"
 				onClick={() => setSidebarHidden((state) => !state)}>
 				{sidebarHidden ? "Show" : "Hide"}
 			</button>
 
+			{/* Main section for the browsing page that has drop downs and game cards  */}
 			<main className="browsing-main">
+				{/* Header with the the  drop downs and tab title*/}
 				<header>
 					<h1 className="search-title">{activeTab.tabTitle}</h1>
 					<div className="drop-downs-container">
@@ -123,29 +127,29 @@ export default function BrowsingPage({
         4. In this case, some games were found so we render them.
         */}
 				{isLoading ? (
-					<p>Loading Games...</p>
+					<div className="tw-flex tw-h-full tw-flex-col tw-items-center tw-justify-center tw-text-3xl">
+						<p>Loading your games!</p>
+					</div>
 				) : searchError ? (
-					<p>Error fetching Games...</p>
+					<div className="tw-flex tw-h-full tw-flex-col tw-items-center tw-justify-center tw-text-3xl">
+						<p>Error Fetching Games!</p>
+					</div>
 				) : gameList.length === 0 ? (
-					<p>Sorry, no games were found. Try changing filters</p>
+					<div className="tw-flex tw-h-full tw-flex-col tw-items-center tw-justify-center tw-text-3xl">
+						<p>Sorry, no games were found. Try changing filters</p>
+					</div>
 				) : (
 					<div className="card-grid">
 						{gameList.map((gameObj) => {
-							const isInCart = shoppingCart.isInCart(gameObj.id);
-
 							return (
 								<GameCard
 									key={gameObj.id}
 									gameObj={gameObj}
 									onCardClick={() => onCardClick(gameObj.slug)}
-									shoppingCartClick={() => {
-										if (isInCart) {
-											shoppingCart.removeFromCart(gameObj.id);
-										} else {
-											shoppingCart.addToCart(gameObj);
-										}
-									}}
-									isInCart={isInCart}
+									shoppingCartClick={() =>
+										shoppingCart.handleCartClick(gameObj)
+									}
+									isInCart={shoppingCart.isInCart(gameObj.id)}
 								/>
 							);
 						})}

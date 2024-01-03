@@ -69,7 +69,7 @@ export default function GameCard({
 							</>
 						)}
 					</button>
-					<span className="game-price">{gameObj.price}</span>
+					<span className="game-price">${gameObj.price}</span>
 				</div>
 				<ul className="platform-icon-list">
 					{platformIcons.map((icon, index) => (

@@ -1,28 +1,11 @@
-.cart-page-main {
-	@apply tw-flex tw-gap-x-4;
-}
-
-.cart-page-main-content,
-.cart-page-sidebar {
+.cart-section {
 	background-color: var(--bg-secondary-dark);
 	@apply tw-rounded-md tw-p-4;
 }
 .cart-page-main-content {
 	flex-basis: 70%;
-	@apply tw-flex tw-flex-col tw-gap-y-4;
 }
 .cart-page-sidebar {
 	flex-basis: 30%;
-}
-.cart-card {
-	@apply tw-flex tw-gap-x-4;
-}
-
-.item-image {
-	@apply tw-overflow-hidden tw-rounded-md;
-}
-.item-image img {
-	width: 200px;
-	height: 200px;
-	object-fit: cover;
+	min-width: 300px;
 }

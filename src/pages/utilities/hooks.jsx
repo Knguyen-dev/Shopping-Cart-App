@@ -53,6 +53,19 @@ export const useShoppingCart = () => {
 	});
 
 	/*
+  + Handles logic for 'add to cart' buttons
+  1. If item is already in cart, clicking will take it out of cart.
+  2. If item isn't in the cart, clicking the item will put it in the cart.
+  */
+	const handleCartClick = (itemObj) => {
+		if (isInCart(itemObj.id)) {
+			removeFromCart(itemObj.id);
+		} else {
+			addToCart(itemObj);
+		}
+	};
+
+	/*
   + Adds new item to the cart
   1. if item is already in cart, we throw an error
   2. Else it isn't already in the cart, so we add it to the cart.
@@ -165,6 +178,7 @@ export const useShoppingCart = () => {
 	const cartObject = {
 		itemArr: cart.itemArr,
 		itemMap: cart.itemMap,
+		handleCartClick,
 		addToCart,
 		removeFromCart,
 		updateItemQuantity,

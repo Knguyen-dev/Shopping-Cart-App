@@ -25,30 +25,17 @@ import {
 	orderingOptions,
 	platformOptions,
 } from "./pages/utilities/constants";
-
 // Providers
 import CartProvider from "./pages/ContextProviders/CartProvider";
 
 import "./App.css";
 
 export default function App() {
-	/*
-  + shoppingCart: Will be an object
-
-  - One part is an array with all of our items, game objects in this case, 
-  
-  - The other part will be a map with the game's rawg api ID and the quanitty 
-  that the user is buying. 
-
-  - We should have a function that sets the quantity as well 
-  */
-
 	const [activeTab, setActiveTab] = useState({});
 	const [itemOrder, setItemOrder] = useState(orderingOptions.options[0]);
 	const [platform, setPlatform] = useState(platformOptions.options[0]);
 	const [gameList, setGameList] = useState([]);
 	const [searchParams, setSearchParams] = useState({});
-
 	const [useDefault, setUseDefault] = useState(true);
 	const [searchError, setSearchError] = useState(false);
 	const [isLoading, setIsLoading] = useState(false);
