@@ -11,6 +11,7 @@ import "../../styles/BrowsingPage.css";
 import GameCard from "../../components/GameCard";
 import CustomDropDown from "../../components/CustomDropDown";
 import SidebarSection from "../../components/SidebarTab";
+import { useCartContext } from "../utilities/hooks.jsx";
 
 export default function BrowsingPage({
 	activeTab,
@@ -28,6 +29,7 @@ export default function BrowsingPage({
 }) {
 	const [sidebarHidden, setSidebarHidden] = useState(false);
 	const navigate = useNavigate();
+	const shoppingCart = useCartContext();
 
 	/*
   + Handles when we want apply default settings to the BrowsePage, which 
@@ -128,13 +130,25 @@ export default function BrowsingPage({
 					<p>Sorry, no games were found. Try changing filters</p>
 				) : (
 					<div className="card-grid">
-						{gameList.map((gameObj) => (
-							<GameCard
-								key={gameObj.id}
-								gameObj={gameObj}
-								onCardClick={() => onCardClick(gameObj.slug)}
-							/>
-						))}
+						{gameList.map((gameObj) => {
+							const isInCart = shoppingCart.isInCart(gameObj.id);
+
+							return (
+								<GameCard
+									key={gameObj.id}
+									gameObj={gameObj}
+									onCardClick={() => onCardClick(gameObj.slug)}
+									shoppingCartClick={() => {
+										if (isInCart) {
+											shoppingCart.removeFromCart(gameObj.id);
+										} else {
+											shoppingCart.addToCart(gameObj);
+										}
+									}}
+									isInCart={isInCart}
+								/>
+							);
+						})}
 					</div>
 				)}
 			</main>

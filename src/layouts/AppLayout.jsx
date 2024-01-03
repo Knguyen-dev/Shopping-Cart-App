@@ -1,6 +1,8 @@
 import { NavLink, Outlet, useNavigate } from "react-router-dom";
-import PropTypes from "prop-types";
 import { useState } from "react";
+import { useCartContext } from "../pages/utilities/hooks";
+import PropTypes from "prop-types";
+
 import "../styles/AppLayout.css";
 
 /*
@@ -18,13 +20,22 @@ BOOK MARK: Still need to work on the search bar functionality
   */
 
 function Navbar({ handleSubmitSearch }) {
-	const navigate = useNavigate();
-
 	const [inputValue, setInputValue] = useState("");
+	const navigate = useNavigate();
+	const shoppingCart = useCartContext();
 
 	const handleInputChange = (e) => {
 		setInputValue(e.target.value);
 	};
+
+	// Handles the submission of the search bar.
+	const onSubmit = (e) => {
+		e.preventDefault();
+		handleSubmitSearch(inputValue);
+		navigate("/browse");
+	};
+
+	const itemQuantity = shoppingCart.getTotalQuantity();
 
 	return (
 		<nav className="tw-flex tw-flex-col tw-items-center tw-gap-4 sm:tw-flex-row sm:tw-gap-x-12">
@@ -32,13 +43,7 @@ function Navbar({ handleSubmitSearch }) {
 				<NavLink to="/">GamerCity</NavLink>
 			</div>
 
-			<form
-				className="input-group"
-				onSubmit={(e) => {
-					e.preventDefault();
-					handleSubmitSearch(inputValue);
-					navigate("/browse");
-				}}>
+			<form className="input-group" onSubmit={onSubmit}>
 				<input
 					type="text"
 					className="form-control"
@@ -48,7 +53,7 @@ function Navbar({ handleSubmitSearch }) {
 					onChange={handleInputChange}
 				/>
 				<button
-					className="tw-rounded-r-md tw-bg-sky-700 tw-px-5 tw-py-3 tw-font-medium tw-text-white"
+					className="bg-primary tw-rounded-r-md tw-px-5 tw-py-3 tw-font-medium tw-text-white"
 					type="submit">
 					Search
 				</button>
@@ -56,7 +61,17 @@ function Navbar({ handleSubmitSearch }) {
 
 			<ul className="tw-flex tw-items-center tw-justify-evenly tw-gap-x-4 tw-gap-y-2 tw-text-xl sm:tw-w-1/5 sm:tw-flex-row ">
 				<NavLink to="/browse">Browse</NavLink>
-				<NavLink>Cart</NavLink>
+
+				<button
+					onClick={() => navigate("/cart")}
+					type="button"
+					className="btn btn-primary position-relative tw-font-bold tw-transition-all">
+					Cart
+					<span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-secondary">
+						{itemQuantity > 99 ? "99+" : itemQuantity}
+						<span className="visually-hidden">Cart Quantity</span>
+					</span>
+				</button>
 				<NavLink>User</NavLink>
 			</ul>
 		</nav>
@@ -88,9 +103,7 @@ export default function AppLayout({ handleSubmitSearch }) {
 			<header id="app-header" className="tw-px-12 tw-py-6 tw-text-white">
 				<Navbar handleSubmitSearch={handleSubmitSearch} />
 			</header>
-			<main
-				id="app-main"
-				className="tw-relative tw-bg-neutral-900 tw-text-white">
+			<main id="app-main" className="tw-relative tw-text-white">
 				<Outlet />
 			</main>
 			<Footer />

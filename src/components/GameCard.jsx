@@ -1,9 +1,15 @@
 // Card for games
+import { FaCheck, FaPlus } from "react-icons/fa6";
 import { platform_map, icon_map } from "../pages/utilities/constants";
 import "../styles/GameCard.css";
 import PropTypes from "prop-types";
 
-export default function GameCard({ gameObj, onCardClick }) {
+export default function GameCard({
+	gameObj,
+	onCardClick,
+	shoppingCartClick,
+	isInCart,
+}) {
 	/*
   - Create a set of platform names that contains any platform name that we 
     can render an icon for. 
@@ -44,7 +50,25 @@ export default function GameCard({ gameObj, onCardClick }) {
 			</div>
 			<div className="card-body">
 				<div className="header-info">
-					<button className="add-cart-btn">Add to Cart</button>
+					<button
+						className="add-cart-btn"
+						onClick={(e) => {
+							// Stop event propagation to prevent onCardClick from triggering
+							e.stopPropagation();
+							shoppingCartClick();
+						}}>
+						{isInCart ? (
+							<>
+								<FaCheck />
+								<span>Added</span>
+							</>
+						) : (
+							<>
+								<FaPlus />
+								<span>Add to cart</span>
+							</>
+						)}
+					</button>
 					<span className="game-price">{gameObj.price}</span>
 				</div>
 				<ul className="platform-icon-list">
@@ -60,4 +84,6 @@ export default function GameCard({ gameObj, onCardClick }) {
 GameCard.propTypes = {
 	gameObj: PropTypes.object,
 	onCardClick: PropTypes.func,
+	shoppingCartClick: PropTypes.func,
+	isInCart: PropTypes.bool,
 };

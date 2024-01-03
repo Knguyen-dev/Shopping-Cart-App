@@ -43,7 +43,7 @@
 }
 
 .add-cart-btn {
-	@apply tw-rounded-md tw-bg-slate-800 tw-px-6 tw-py-2;
+	@apply tw-flex tw-items-center tw-gap-x-2 tw-rounded-md tw-bg-slate-800 tw-px-4 tw-py-2;
 }
 
 .platform-icon-list {

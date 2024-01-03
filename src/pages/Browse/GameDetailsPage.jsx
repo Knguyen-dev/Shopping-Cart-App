@@ -6,7 +6,8 @@ import "../../styles/GameDetailsPage.css";
 
 import notFoundImg from "../../assets/images/image-not-found.png";
 import { FaChevronUp, FaChevronDown, FaArrowLeft } from "react-icons/fa";
-import { IoIosAdd } from "react-icons/io";
+import { FaCheck, FaPlus } from "react-icons/fa6";
+import { useCartContext } from "../utilities/hooks";
 
 /*
 
@@ -53,6 +54,7 @@ export default function GameDetailsPage() {
 		useGameData(slug);
 	const [isExpanded, setIsExpanded] = useState(false);
 	const navigate = useNavigate();
+	const shoppingCart = useCartContext();
 
 	/*
   + Generates markup for list data such as platforms, developers, and 
@@ -154,11 +156,28 @@ export default function GameDetailsPage() {
 								</div>
 							</div>
 
-							<button className="tw-flex tw-justify-between tw-rounded-lg tw-bg-gray-800 tw-px-6 tw-py-4 tw-text-2xl">
+							<button
+								className="tw-flex tw-justify-between tw-rounded-lg tw-bg-gray-800 tw-px-6 tw-py-4 tw-text-2xl"
+								onClick={() => {
+									if (shoppingCart.isInCart(gameDetails.id)) {
+										shoppingCart.removeFromCart(gameDetails.id);
+									} else {
+										shoppingCart.addToCart(gameDetails);
+									}
+								}}>
 								<span>{gameDetails.price}</span>
-								<div className="tw-flex tw-items-center">
-									<IoIosAdd />
-									<span>Add to cart</span>
+								<div className="tw-flex tw-items-center tw-gap-x-2">
+									{shoppingCart.isInCart(gameDetails.id) ? (
+										<>
+											<FaCheck />
+											<span>Added</span>
+										</>
+									) : (
+										<>
+											<FaPlus />
+											<span>Add to cart</span>
+										</>
+									)}
 								</div>
 							</button>
 						</div>

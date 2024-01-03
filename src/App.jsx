@@ -16,6 +16,7 @@ import HomePage from "./pages/HomePage";
 import BrowsingPage from "./pages/Browse/BrowsePage";
 import GameDetailsPage from "./pages/Browse/GameDetailsPage";
 import NotFoundPage from "./pages/NotFoundPage";
+import CartPage from "./pages/CartPage";
 
 // Fucntions and constants
 import { fetchGames } from "./pages/utilities/requests";
@@ -24,6 +25,9 @@ import {
 	orderingOptions,
 	platformOptions,
 } from "./pages/utilities/constants";
+
+// Providers
+import CartProvider from "./pages/ContextProviders/CartProvider";
 
 import "./App.css";
 
@@ -218,7 +222,10 @@ export default function App() {
 						/>
 						<Route path=":slug" element={<GameDetailsPage />} />
 					</Route>
+
+					<Route path="cart" element={<CartPage />} />
 				</Route>
+
 				<Route path="auth" element={<AuthLayout />}>
 					<Route path="login" element={<LoginPage />} />
 					<Route path="register" element={<RegisterPage />} />
@@ -228,5 +235,9 @@ export default function App() {
 		)
 	);
 
-	return <RouterProvider router={appRouter} />;
+	return (
+		<CartProvider>
+			<RouterProvider router={appRouter} />
+		</CartProvider>
+	);
 }

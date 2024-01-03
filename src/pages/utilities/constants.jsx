@@ -287,5 +287,4 @@ export const CART_ACTIONS = {
 	addToCart: "ADD_TO_CART",
 	removeFromCart: "REMOVE_FROM_CART",
 	setQuantity: "SET_QUANTITY",
-	getQuantity: "GET_QUANTITY",
 };

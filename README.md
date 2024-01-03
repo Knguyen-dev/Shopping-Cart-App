@@ -1,10 +1,13 @@
 # React + Vite
 
 /*
+
+
 - BOOK MARK: 
 
 3. Test out shopping cart in a test file. When it's good, implement 
   our CartProvider.
+
 
 4. Set up shopping cart page and somehow link it to the browsing page. Here we
   are required to have a badge that indicates the amount of stuff in cart.

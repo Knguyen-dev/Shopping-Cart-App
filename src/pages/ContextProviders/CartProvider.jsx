@@ -4,27 +4,9 @@ import { useShoppingCart } from "../utilities/hooks";
 
 export const CartContext = createContext();
 export default function CartProvider({ children }) {
-	const {
-		cartItems,
-		addToCart,
-		removeFromCart,
-		updateItemQuantity,
-		isInCart,
-		getItemQuantity,
-	} = useShoppingCart();
-
+	const shoppingCart = useShoppingCart();
 	return (
-		<CartContext.Provider
-			value={{
-				cartItems,
-				addToCart,
-				removeFromCart,
-				updateItemQuantity,
-				isInCart,
-				getItemQuantity,
-			}}>
-			{children}
-		</CartContext.Provider>
+		<CartContext.Provider value={shoppingCart}>{children}</CartContext.Provider>
 	);
 }
 CartProvider.propTypes = {

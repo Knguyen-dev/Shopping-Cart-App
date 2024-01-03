@@ -5,6 +5,7 @@
 }
 
 #app-header,
+#app-main,
 #app-footer {
 	background-color: var(--bg-primary-dark);
 }

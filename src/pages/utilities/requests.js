@@ -114,6 +114,7 @@ export async function fetchGames(params = {}) {
 */
 export function processGameDetails(gameData) {
 	const gameDetails = {
+		id: gameData.id,
 		name: gameData.name,
 		description: gameData.description_raw
 			? gameData.description_raw
