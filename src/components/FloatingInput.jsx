@@ -1,18 +1,21 @@
-import PropTypes from "prop-types"
-
+import PropTypes from "prop-types";
+/*
++ FloatingInput: Component used to create input element with floating labels.
+  Created with the help of bootstrap.
+*/
 export default function FloatingInput({
-  id,
+	id,
 	placeholder,
 	type,
 	labelText,
 	onChange,
 	value,
 	name,
-	required
+	required,
 }) {
-  return (
-    <div className="form-floating">
-      {type === "textarea" ? (
+	return (
+		<div className="form-floating">
+			{type === "textarea" ? (
 				<textarea
 					id={id}
 					placeholder={placeholder}
@@ -20,8 +23,7 @@ export default function FloatingInput({
 					value={value}
 					name={name}
 					required={required ? true : false}
-          className="form-control"
-				></textarea>
+					className="form-control"></textarea>
 			) : (
 				<input
 					type={type}
@@ -31,23 +33,23 @@ export default function FloatingInput({
 					value={value}
 					name={name}
 					required={required ? true : false}
-          className="form-control"
+					className="form-control"
 				/>
 			)}
-      <label htmlFor={id} className="form-label">
-        {labelText}
-      </label>
-    </div>
-  )
+			<label htmlFor={id} className="form-label">
+				{labelText}
+			</label>
+		</div>
+	);
 }
 
 FloatingInput.propTypes = {
-  id: PropTypes.string,
-  placeholder: PropTypes.string,
-  type: PropTypes.string,
-  labelText: PropTypes.string,
-  onChange: PropTypes.func,
-  value: PropTypes.string,
-  name: PropTypes.string,
-  required: PropTypes.bool,
-}
+	id: PropTypes.string,
+	placeholder: PropTypes.string,
+	type: PropTypes.string,
+	labelText: PropTypes.string,
+	onChange: PropTypes.func,
+	value: PropTypes.string,
+	name: PropTypes.string,
+	required: PropTypes.bool,
+};

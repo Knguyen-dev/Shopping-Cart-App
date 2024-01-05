@@ -3,7 +3,7 @@ import RegisterForm from "../../components/RegisterForm";
 
 export default function RegisterPage() {
 	return (
-		<div className="form-container tw-w-2/3 tw-rounded-md tw-px-4 tw-py-6 sm:tw-w-2/5">
+		<div className=" tw-w-2/3 tw-rounded-md tw-px-4 tw-py-6 sm:tw-w-2/5">
 			<h1 className="tw-mb-5 tw-text-xl">Sign up Today!</h1>
 			<RegisterForm />
 			<div className="tw-flex tw-flex-col tw-gap-y-2">

@@ -1,10 +1,4 @@
 /*
-- Things to fix:
-4. Also when we resize to smaller screens, it automatically shows our sidebar 
-  first. Obviously we can still close it, but it's somewhat annoying.
-*/
-
-/*
 + Browsing Page
 - Below small breakpoint there should just be one column for the grid, which 
   means one card would be shown in the grid.
@@ -16,6 +10,7 @@
 	display: grid;
 	grid-template-columns: auto;
 	height: 100%;
+	@apply tw-bg-gray-950;
 }
 @media screen and (min-width: 640px) {
 	.browsing-page {
@@ -37,7 +32,6 @@
   as a default style will make the sidebar look weird below the small breakpoint.
 */
 .browsing-sidebar {
-	background-color: var(--bg-primary-dark);
 	position: fixed;
 	inset: 0;
 	z-index: 10;
@@ -45,61 +39,9 @@
 	display: grid;
 	grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
 	overflow-y: scroll;
-	@apply tw-gap-y-2 sm:tw-sticky sm:tw-top-0 sm:tw-flex sm:tw-h-screen sm:tw-flex-col;
-}
-
-.toggle-sidebar-btn {
-	@apply tw-fixed tw-bottom-5 tw-right-5 tw-z-20 tw-rounded-full tw-bg-white tw-p-3 tw-text-black sm:tw-hidden;
-}
-
-.sidebar-section-title {
-	@apply tw-mb-2 tw-text-xl tw-font-bold;
-}
-
-.sidebar-tab {
-	@apply tw-mb-1 tw-flex tw-cursor-pointer tw-items-center tw-justify-start tw-gap-x-2 tw-font-medium;
-}
-.sidebar-tab-icon {
-	border: 2px solid black;
-	@apply tw-flex tw-items-center tw-justify-center tw-rounded-lg tw-p-2 tw-transition-all;
-}
-
-.sidebar-tab:hover {
-	.sidebar-tab-icon {
-		@apply tw-bg-white tw-text-black;
-	}
-}
-
-.sidebar-tab.active-tab .sidebar-tab-icon {
-	@apply tw-bg-white tw-text-black;
-}
-
-.browsing-main {
-	background-color: var(--bg-primary-dark);
-	@apply tw-px-4 tw-text-white;
-}
-
-.search-title {
-	@apply tw-mb-2 tw-text-4xl tw-font-medium;
-}
-
-.drop-downs-container {
-	@apply tw-flex tw-gap-x-2;
-}
-
-.custom-drop-down button {
-	@apply tw-flex tw-items-center tw-gap-x-1 tw-rounded-md tw-bg-white tw-px-4 tw-py-2 tw-text-black;
-}
-
-.custom-drop-down .dropdown-item {
-	@apply tw-flex tw-items-center tw-justify-between tw-transition-all;
-}
-.custom-drop-down .dropdown-item:hover {
-	background-color: rgba(0, 0, 0, 0.1);
-}
-
-.browsing-main header {
-	@apply tw-mb-2;
+	/* Need bg so we can cover the browse page on mobile */
+	background-color: inherit;
+	@apply tw-gap-y-2  sm:tw-sticky sm:tw-top-0 sm:tw-flex sm:tw-h-screen sm:tw-flex-col;
 }
 
 /* 

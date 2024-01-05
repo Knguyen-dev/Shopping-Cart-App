@@ -7,6 +7,7 @@ import notFoundImg from "../../assets/images/image-not-found.png";
 import { FaChevronUp, FaChevronDown, FaArrowLeft } from "react-icons/fa";
 import { FaCheck, FaPlus } from "react-icons/fa6";
 import { useCartContext } from "../utilities/hooks";
+import { useAuthContext } from "../ContextProviders/AuthProvider";
 
 const useGameData = (slug) => {
 	const [gameDetails, setGameDetails] = useState();
@@ -53,6 +54,7 @@ export default function GameDetailsPage() {
 		useGameData(slug);
 	const [isExpanded, setIsExpanded] = useState(false);
 	const navigate = useNavigate();
+	const auth = useAuthContext();
 	const shoppingCart = useCartContext();
 
 	/*
@@ -107,8 +109,9 @@ export default function GameDetailsPage() {
 	}
 
 	return (
-		<div className="game-details-page">
-			<header className="game-details-header tw-mb-3">
+		<div className="tw-px-12 tw-py-4 tw-text-white">
+			{/* Header that has game title and back button link */}
+			<header className="tw-mb-3 tw-flex tw-flex-col tw-items-center tw-justify-between tw-font-bold md:tw-flex-row">
 				<button
 					onClick={handleBackBtnClick}
 					className="tw-flex tw-items-center tw-gap-x-2">
@@ -119,8 +122,10 @@ export default function GameDetailsPage() {
 					{gameDetails && gameDetails.name}
 				</h1>
 			</header>
-			<main className="game-details-main ">
-				{/* if background image doesn't exist, we'll just not 
+
+			{/* Main content for game details page */}
+			<main className="tw-flex tw-flex-col tw-gap-4 md:tw-flex-row">
+				{/* Game Image section: if background image doesn't exist, we'll just not 
           render the carousel. */}
 				<div className="game-image-section">
 					{gameDetails.background_image === notFoundImg ? (
@@ -133,6 +138,8 @@ export default function GameDetailsPage() {
 						<Carousel images={[gameDetails.background_image, ...gameImages]} />
 					)}
 				</div>
+
+				{/* Game details sidebar */}
 				<div className="game-details-sidebar">
 					<div className="game-info">
 						<div className="game-info-top">
@@ -162,7 +169,10 @@ export default function GameDetailsPage() {
 								{generateListMarkup("Publishers", gameDetails.publishers)}
 							</div>
 
-							<button onClick={() => setIsExpanded((state) => !state)}>
+							{/* Toggle button for expanding game info section */}
+							<button
+								className="tw-ml-auto tw-flex tw-items-center tw-gap-x-2 tw-text-lg"
+								onClick={() => setIsExpanded((state) => !state)}>
 								{isExpanded ? (
 									<>
 										<FaChevronUp />
@@ -178,9 +188,19 @@ export default function GameDetailsPage() {
 						</div>
 					</div>
 
+					{/* Add to cart button. Same logic as in BrowsePage, check if authenticated before letting
+            user add the item to their cart */}
 					<button
 						className="tw-flex tw-justify-between tw-rounded-lg tw-bg-gray-800 tw-px-6 tw-py-4 tw-text-2xl"
-						onClick={() => shoppingCart.handleCartClick(gameDetails)}>
+						onClick={() => {
+							if (!auth.token) {
+								navigate("/auth/login", {
+									state: { from: location.pathname },
+								});
+							} else {
+								shoppingCart.handleCartClick(gameDetails);
+							}
+						}}>
 						<span>${gameDetails.price}</span>
 						<div className="tw-flex tw-items-center tw-gap-x-2">
 							{shoppingCart.isInCart(gameDetails.id) ? (

@@ -1,6 +1,5 @@
-.cart-section {
-	background-color: var(--bg-secondary-dark);
-	@apply tw-rounded-md tw-p-4;
+.custom-section {
+	@apply tw-rounded-md tw-bg-gray-800 tw-p-4;
 }
 .cart-page-main-content {
 	flex-basis: 70%;

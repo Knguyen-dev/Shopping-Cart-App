@@ -1,7 +1,8 @@
+import PropTypes from "prop-types";
 import FloatingInput from "./FloatingInput";
-export default function LoginForm() {
+export default function LoginForm({ onSubmit }) {
 	return (
-		<form id="login-form">
+		<form id="login-form" onSubmit={onSubmit}>
 			<div className="tw-mb-4 tw-flex tw-flex-col tw-gap-y-3">
 				<FloatingInput
 					labelText="Email:"
@@ -26,3 +27,6 @@ export default function LoginForm() {
 		</form>
 	);
 }
+LoginForm.propTypes = {
+	onSubmit: PropTypes.func,
+};

@@ -1,0 +1,19 @@
+.sidebar-section-title {
+	@apply tw-mb-2 tw-text-xl tw-font-bold;
+}
+.sidebar-tab {
+	@apply tw-mb-1 tw-flex tw-cursor-pointer tw-items-center tw-justify-start tw-gap-x-2 tw-font-medium;
+}
+.sidebar-tab-icon {
+	@apply tw-flex tw-items-center tw-justify-center tw-rounded-lg tw-p-2 tw-transition-all;
+}
+
+.sidebar-tab:hover {
+	.sidebar-tab-icon {
+		@apply tw-bg-white tw-text-black;
+	}
+}
+
+.sidebar-tab.active-tab .sidebar-tab-icon {
+	@apply tw-bg-white tw-text-black;
+}

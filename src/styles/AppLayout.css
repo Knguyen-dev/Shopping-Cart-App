@@ -3,9 +3,3 @@
 	height: 100vh;
 	grid-template-rows: auto 1fr auto;
 }
-
-#app-header,
-#app-main,
-#app-footer {
-	background-color: var(--bg-primary-dark);
-}

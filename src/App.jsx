@@ -7,8 +7,11 @@ import {
 import { useState } from "react";
 
 // Layouts
+import RootLayout from "./layouts/RootLayout";
 import AppLayout from "./layouts/AppLayout";
 import AuthLayout from "./layouts/AuthLayout";
+import AccountLayout from "./layouts/AccountLayout";
+
 // Pages
 import LoginPage from "./pages/Auth/LoginPage";
 import RegisterPage from "./pages/Auth/RegisterPage";
@@ -17,17 +20,18 @@ import BrowsingPage from "./pages/Browse/BrowsePage";
 import GameDetailsPage from "./pages/Browse/GameDetailsPage";
 import NotFoundPage from "./pages/NotFoundPage";
 import CartPage from "./pages/CartPage";
+import AccountHomePage from "./pages/Account/AccountHomePage";
 
-// Fucntions and constants
+// Components
+import ProtectedRoute from "./components/ProtectedRoute";
+
+// Functions and constants
 import { fetchGames } from "./pages/utilities/requests";
 import {
-	sidebarSections,
+	browseSidebarSections,
 	orderingOptions,
 	platformOptions,
 } from "./pages/utilities/constants";
-// Providers
-import CartProvider from "./pages/ContextProviders/CartProvider";
-
 import "./App.css";
 
 export default function App() {
@@ -104,7 +108,7 @@ export default function App() {
     itemOrder and platform to still be defined even in that case.
   */
 	const loadInitialBrowsePage = () => {
-		const defaultTab = sidebarSections[1].tabs[1];
+		const defaultTab = browseSidebarSections[1].tabs[1];
 		const defaultSearchParams = handleTabSearchParams(
 			defaultTab,
 			orderingOptions.options[0],
@@ -182,7 +186,7 @@ export default function App() {
 
 	const appRouter = createBrowserRouter(
 		createRoutesFromElements(
-			<Route path="/">
+			<Route path="/" element={<RootLayout />}>
 				<Route
 					path=""
 					element={<AppLayout handleSubmitSearch={handleSubmitSearch} />}>
@@ -210,7 +214,23 @@ export default function App() {
 						<Route path=":slug" element={<GameDetailsPage />} />
 					</Route>
 
-					<Route path="cart" element={<CartPage />} />
+					<Route
+						path="cart"
+						element={
+							<ProtectedRoute>
+								<CartPage />
+							</ProtectedRoute>
+						}
+					/>
+					<Route
+						path="account"
+						element={
+							<ProtectedRoute>
+								<AccountLayout />
+							</ProtectedRoute>
+						}>
+						<Route index element={<AccountHomePage />} />
+					</Route>
 				</Route>
 
 				<Route path="auth" element={<AuthLayout />}>
@@ -222,9 +242,5 @@ export default function App() {
 		)
 	);
 
-	return (
-		<CartProvider>
-			<RouterProvider router={appRouter} />
-		</CartProvider>
-	);
+	return <RouterProvider router={appRouter} />;
 }

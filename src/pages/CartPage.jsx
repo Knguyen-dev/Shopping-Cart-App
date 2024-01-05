@@ -1,11 +1,5 @@
 /*
-- Structure:
-1. main section on the left, basically a flexbox with cart cards that show the image, name, price of 
-  the item. There should be options for removing the item, and a component that lets you 
-  control the quantity of the item. Minimum being 1, and maximum being maybe 5.
-2. Sidebar on the right side that shows subtotal, and a button for 'proceed to checkout'
-
-NOTE: About shopping carts. In a real shopping cart you'd probably
+- NOTE: About shopping carts. In a real shopping cart you'd probably
   store the ids of the products and fetch data for each product. This is to 
   ensure you get the latest prices. So yeah realistically you'd probably
   just want a map of IDS and their quantities and you'd fetch. But 
@@ -17,8 +11,6 @@ import { useCartContext } from "./utilities/hooks";
 import "../styles/CartPage.css";
 export default function CartPage() {
 	const shoppingCart = useCartContext();
-
-	//
 	const cartQuantity = shoppingCart.getTotalQuantity();
 	const subtotal = shoppingCart.getCartTotal();
 
@@ -45,8 +37,9 @@ export default function CartPage() {
 	}
 
 	return (
-		<div className="cart-page tw-px-12 tw-py-4">
-			<header className="cart-page-header tw-mb-2 tw-text-2xl tw-font-bold">
+		<div className="tw-px-12 tw-py-4">
+			{/* Cart page header */}
+			<header className="tw-mb-2 tw-text-2xl tw-font-bold">
 				<h1>
 					Cart <span className="tw-text-gray-400">({cartQuantity} items)</span>
 				</h1>
@@ -55,13 +48,15 @@ export default function CartPage() {
 			{/* Main content for cart page */}
 			<main className="tw-flex tw-flex-col-reverse tw-gap-x-4 md:tw-flex-row">
 				{/* Main content for the cart that contains the cards for the cart items */}
-				<div className="cart-page-main-content cart-section tw-flex tw-flex-col tw-gap-y-4">
+				<div className="cart-page-main-content tw-flex tw-flex-col tw-gap-y-2">
 					{shoppingCart.itemArr.map((gameObj) => {
 						const itemQuantity = shoppingCart.getItemQuantity(gameObj.id);
 
 						// Render a cart card
 						return (
-							<div key={gameObj.id} className="cart-card tw-flex tw-gap-x-4">
+							<div
+								key={gameObj.id}
+								className="custom-section tw-flex tw-gap-x-4">
 								{/* Image for cart item */}
 								<div className="tw-my-auto tw-hidden tw-self-start tw-overflow-hidden tw-rounded-md sm:tw-block">
 									<img
@@ -123,7 +118,7 @@ export default function CartPage() {
 				{/* Sidebar for the cart page */}
 				<div className="cart-page-sidebar tw-mb-4 md:tw-sticky md:tw-top-4 md:tw-self-start">
 					{/* Subtotal section */}
-					<div className="cart-section tw-flex tw-flex-col tw-gap-y-1">
+					<div className="custom-section tw-flex tw-flex-col tw-gap-y-1">
 						<div className="tw-flex tw-justify-between tw-text-lg">
 							<span className="tw-w-3/4">Subtotal ({cartQuantity} items)</span>
 							<span>${subtotal}</span>

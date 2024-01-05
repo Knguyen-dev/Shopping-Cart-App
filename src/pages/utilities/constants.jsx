@@ -14,13 +14,16 @@ import {
 	FaApple,
 	FaMobileAlt,
 	FaAndroid,
+	FaRegUser,
 } from "react-icons/fa";
 import { TbPlayerTrackNext } from "react-icons/tb";
 import { GoTrophy } from "react-icons/go";
 import { BsGraphUpArrow, BsNintendoSwitch } from "react-icons/bs";
 import { LuSwords } from "react-icons/lu";
-import { FaGun } from "react-icons/fa6";
+import { FaGun, FaGear } from "react-icons/fa6";
+import { CiLogout } from "react-icons/ci";
 import { createDateModule } from "./utilities";
+
 const dateModule = createDateModule();
 
 export const PLATFORM_IDS = {
@@ -44,7 +47,7 @@ export const GENRE_IDS = {
 	Sports: 15,
 };
 
-export const sidebarSections = [
+export const browseSidebarSections = [
 	{
 		sectionTitle: "New Games",
 		tabs: [
@@ -145,6 +148,48 @@ export const sidebarSections = [
 		],
 	},
 ];
+
+export const accountSidebarSections = [
+	{
+		sectionTitle: "Manage Account",
+		tabs: [
+			{
+				tabTitle: "Personal Info",
+				icon: <FaRegUser />,
+			},
+			{
+				tabTitle: "Account Settings",
+				icon: <FaGear />,
+			},
+			{
+				tabTitle: "Sign Out",
+				icon: <CiLogout />,
+			},
+		],
+	},
+	{
+		sectionTitle: "Your Orders",
+		tabs: [
+			{
+				tabTitle: "Purchase History",
+				icon: <FaStar />,
+			},
+			{
+				tabTitle: "My savings",
+				icon: <FaStar />,
+			},
+			{
+				tabTitle: "Wallet",
+				icon: <FaStar />,
+			},
+			{
+				tabTitle: "GamerCity+",
+				icon: <FaStar />,
+			},
+		],
+	},
+];
+
 // Options for the dropdown for ordering the games
 export const orderingOptions = {
 	dropDownTitle: "Order By",

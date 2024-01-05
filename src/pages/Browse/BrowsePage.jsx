@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
 import {
-	sidebarSections,
+	browseSidebarSections,
 	orderingOptions,
 	platformOptions,
 	SMALL_BREAKPOINT,
@@ -10,8 +10,9 @@ import {
 import "../../styles/BrowsingPage.css";
 import GameCard from "../../components/GameCard";
 import CustomDropDown from "../../components/CustomDropDown";
-import SidebarSection from "../../components/SidebarTab";
+import SidebarSection from "../../components/SidebarSection";
 import { useCartContext } from "../utilities/hooks.jsx";
+import { useAuthContext } from "../ContextProviders/AuthProvider.jsx";
 
 export default function BrowsingPage({
 	activeTab,
@@ -29,6 +30,7 @@ export default function BrowsingPage({
 }) {
 	const [sidebarHidden, setSidebarHidden] = useState(false);
 	const navigate = useNavigate();
+	const auth = useAuthContext();
 	const shoppingCart = useCartContext();
 
 	/*
@@ -78,7 +80,7 @@ export default function BrowsingPage({
 		<div className="browsing-page">
 			{/* Sidebar */}
 			<div className={`browsing-sidebar ${sidebarHidden ? "tw-hidden" : ""}`}>
-				{sidebarSections.map((sectionObj, index) => (
+				{browseSidebarSections.map((sectionObj, index) => (
 					<SidebarSection
 						key={`${sectionObj.sectionTitle}-${index}`}
 						sectionObj={sectionObj}
@@ -90,17 +92,19 @@ export default function BrowsingPage({
 
 			{/* Toggle sidebar button for mobile screens */}
 			<button
-				className="toggle-sidebar-btn"
+				className="tw-fixed tw-bottom-5 tw-right-5 tw-z-20 tw-rounded-full tw-bg-white tw-p-3 tw-text-black sm:tw-hidden"
 				onClick={() => setSidebarHidden((state) => !state)}>
 				{sidebarHidden ? "Show" : "Hide"}
 			</button>
 
 			{/* Main section for the browsing page that has drop downs and game cards  */}
-			<main className="browsing-main">
+			<main className="browsing-main tw-px-4 tw-text-white">
 				{/* Header with the the  drop downs and tab title*/}
-				<header>
-					<h1 className="search-title">{activeTab.tabTitle}</h1>
-					<div className="drop-downs-container">
+				<header className="tw-mb-2">
+					<h1 className="tw-mb-2 tw-text-4xl tw-font-medium">
+						{activeTab.tabTitle}
+					</h1>
+					<div className="tw-flex tw-gap-x-2">
 						{!activeTab.ignoreOrderDropDown && (
 							<CustomDropDown
 								dropDownOptions={orderingOptions}
@@ -119,7 +123,7 @@ export default function BrowsingPage({
 				</header>
 
 				{/* 
-        + Conditional rendering for games:
+        + Conditional rendering for game cards:
         1. If still loading (query still happening), show loading text.
         2. Not loading, but there's been an error, show error text.
         3. Not loading and no errors, but there are no games then we tell the user 
@@ -146,9 +150,15 @@ export default function BrowsingPage({
 									key={gameObj.id}
 									gameObj={gameObj}
 									onCardClick={() => onCardClick(gameObj.slug)}
-									shoppingCartClick={() =>
-										shoppingCart.handleCartClick(gameObj)
-									}
+									shoppingCartClick={() => {
+										if (!auth.token) {
+											navigate("/auth/login", {
+												state: { from: location.pathname },
+											});
+										} else {
+											shoppingCart.handleCartClick(gameObj);
+										}
+									}}
 									isInCart={shoppingCart.isInCart(gameObj.id)}
 								/>
 							);

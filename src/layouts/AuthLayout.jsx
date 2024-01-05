@@ -12,7 +12,6 @@ export default function AuthLayout() {
 				</div>
 				<Outlet />
 			</main>
-
 			<Footer />
 		</div>
 	);
