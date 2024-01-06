@@ -1,9 +1,11 @@
-# GamerCity, A mock shopping application
+# GamerCity, A mock shopping application for buying videogames
 - Imitates an eccomerce website with a shopping cart. In this case the user
   is shopping for video games. Video game data provided by Rawg API. However since our 
   api doesn't provide prices for the games, we hard-coded those in our fetch calls to simulate 
   us actually getting the prices. Again this isn't a real shopping platform, just a pretend one.
 
+
++ Live Preview: https://knguyen-dev-gamercity.netlify.app/
 
 + Features:
 1. Increase or decrease quantity in shopping cart, removing items from shopping cart.
