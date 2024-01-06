@@ -14,7 +14,7 @@ export default function LoginPage() {
 				<a href="#">Forgot Password?</a>
 				<hr></hr>
 				<div className="tw-self-center tw-rounded-md tw-bg-emerald-500 tw-px-5 tw-py-3 tw-font-bold tw-text-white">
-					<NavLink to="/auth/register">Create New Account</NavLink>
+					<NavLink to="/auth">Create New Account</NavLink>
 				</div>
 			</div>
 		</div>

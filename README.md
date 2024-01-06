@@ -31,4 +31,11 @@
 3. Odin Project: https://www.theodinproject.com/lessons/node-path-react-new-shopping-cart
 
 
-+ Deploying via nellify
++ Deploying via Netlify:
+1. First put "_redirects" in your public directory. 
+  This will redirect all routes to index page and let react-router-dom
+  handle the rest. Basically fixes some routing issues.
+2. Create a Netfliy account and after it should let you
+  deploy a site.
+3. Choose the repository you want to deploy from and select it.
+4. You should be done as it does all work for you.

@@ -234,8 +234,8 @@ export default function App() {
 				</Route>
 
 				<Route path="auth" element={<AuthLayout />}>
+					<Route index element={<RegisterPage />} />
 					<Route path="login" element={<LoginPage />} />
-					<Route path="register" element={<RegisterPage />} />
 				</Route>
 				<Route path="*" element={<NotFoundPage />} />
 			</Route>
