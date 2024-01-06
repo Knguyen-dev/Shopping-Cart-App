@@ -1,5 +1,11 @@
 import PropTypes from "prop-types";
 import FloatingInput from "./FloatingInput";
+
+/*
++ LoginForm: Component that represents the login form used on the 
+  login page.
+*/
+
 export default function LoginForm({ onSubmit }) {
 	return (
 		<form id="login-form" onSubmit={onSubmit}>

@@ -3,10 +3,7 @@
   determined by the grid column's sizes, but for the height, we want
   all cards to have the same height so we'll have a fixed height for that
 
-
-*/
-/* 
-- We want the cards to take 100% of their column defined by the 
+  - We want the cards to take 100% of their column defined by the 
   grid. Set a max height to avoid avoids going over a certain limit.
 
   NOTE: With this not all of the cards will be the same uniform height, but 

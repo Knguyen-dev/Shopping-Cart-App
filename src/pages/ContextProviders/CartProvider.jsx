@@ -1,6 +1,6 @@
 import { createContext } from "react";
 import PropTypes from "prop-types";
-import { useShoppingCart } from "../utilities/hooks";
+import { useShoppingCart } from "./hooks/useShoppingCart";
 
 export const CartContext = createContext();
 export default function CartProvider({ children }) {

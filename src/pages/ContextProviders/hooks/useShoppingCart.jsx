@@ -1,6 +1,5 @@
-import { useContext, useReducer } from "react";
-import { CartContext } from "../ContextProviders/CartProvider";
-import { CART_ACTIONS } from "./constants";
+import { useReducer } from "react";
+import { CART_ACTIONS } from "../../utilities/constants";
 
 function cartReducer(state, action) {
 	let updatedItemMap, updatedPriceMap;
@@ -189,8 +188,4 @@ export const useShoppingCart = () => {
 		getCartTotal,
 	};
 	return cartObject;
-};
-
-export const useCartContext = () => {
-	return useContext(CartContext);
 };

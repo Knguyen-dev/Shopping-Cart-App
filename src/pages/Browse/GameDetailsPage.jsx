@@ -6,8 +6,8 @@ import "../../styles/GameDetailsPage.css";
 import notFoundImg from "../../assets/images/image-not-found.png";
 import { FaChevronUp, FaChevronDown, FaArrowLeft } from "react-icons/fa";
 import { FaCheck, FaPlus } from "react-icons/fa6";
-import { useCartContext } from "../utilities/hooks";
-import { useAuthContext } from "../ContextProviders/AuthProvider";
+import { useCartContext } from "../ContextProviders/hooks/useCartContext.jsx";
+import { useAuthContext } from "../ContextProviders/hooks/useAuthContext.jsx";
 
 const useGameData = (slug) => {
 	const [gameDetails, setGameDetails] = useState();

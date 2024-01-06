@@ -7,7 +7,7 @@
 
 */
 
-import { useCartContext } from "./utilities/hooks";
+import { useCartContext } from "./ContextProviders/hooks/useCartContext";
 import "../styles/CartPage.css";
 export default function CartPage() {
 	const shoppingCart = useCartContext();

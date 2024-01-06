@@ -1,16 +1,18 @@
 import { NavLink, Outlet, useNavigate } from "react-router-dom";
 import { useState } from "react";
-import { useCartContext } from "../pages/utilities/hooks";
+
 import PropTypes from "prop-types";
 import "../styles/AppLayout.css";
-import { useAuthContext } from "../pages/ContextProviders/AuthProvider";
-
+import { useAuthContext } from "../pages/ContextProviders/hooks/useAuthContext";
+import { useCartContext } from "../pages/ContextProviders/hooks/useCartContext";
+// Navbar component for our app
 function Navbar({ handleSubmitSearch }) {
 	const [inputValue, setInputValue] = useState("");
 	const navigate = useNavigate();
 	const auth = useAuthContext();
 	const shoppingCart = useCartContext();
 
+	// Updates input value of search bar
 	const handleInputChange = (e) => {
 		setInputValue(e.target.value);
 	};
@@ -22,6 +24,7 @@ function Navbar({ handleSubmitSearch }) {
 		navigate("/browse");
 	};
 
+	// Get amount of items in our cart. Could be zero if user isn't authed or if nothing in cart.
 	const itemQuantity = shoppingCart.getTotalQuantity();
 
 	return (
@@ -77,6 +80,7 @@ Navbar.propTypes = {
 	handleSubmitSearch: PropTypes.func,
 };
 
+// Footer of our App
 export function Footer() {
 	return (
 		<footer

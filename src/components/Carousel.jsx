@@ -2,6 +2,12 @@ import { useState } from "react";
 import PropTypes from "prop-types";
 import "../styles/Carousel.css";
 
+/*
++ Carousel: Component for creating an image carousel. 
+- Parameters:
+1. images: Array of image links
+*/
+
 export default function Carousel({ images }) {
 	const [slideIndex, setSlideIndex] = useState(0);
 

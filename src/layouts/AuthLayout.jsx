@@ -2,6 +2,7 @@ import { Footer } from "./AppLayout";
 import { Outlet } from "react-router";
 import "../styles/AuthLayout.css";
 
+// Layout for the auth section for our website.
 export default function AuthLayout() {
 	return (
 		<div className="tw-flex tw-min-h-screen tw-flex-col">

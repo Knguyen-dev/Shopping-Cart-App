@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable react-refresh/only-export-components */
 
-import { createContext, useState, useContext } from "react";
+import { createContext, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 
 export const fakeAuth = () =>
@@ -9,10 +9,7 @@ export const fakeAuth = () =>
 		setTimeout(() => resolve("2342f2f1d131rf12"), 250);
 	});
 
-const AuthContext = createContext();
-export function useAuthContext() {
-	return useContext(AuthContext);
-}
+export const AuthContext = createContext();
 
 export default function AuthProvider({ children }) {
 	const [token, setToken] = useState(null);
@@ -39,9 +36,15 @@ export default function AuthProvider({ children }) {
 		navigate(origin);
 	};
 
+	/*
+  + Handles logging out users
+  1. Set their token to none to indicate no user is authenticated and 
+  2. Send them to login page.
+  */
+
 	const handleLogout = () => {
 		setToken(null);
-		navigate("/");
+		navigate("/auth/login");
 	};
 
 	return (

@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 /*
 + CustomDropDown: A custom dropdown component that's created
-  using a combinatio nof bootstarp and tailwind css.
+  using a combination of bootstrap and tailwind css.
 
 */
 
@@ -29,7 +29,7 @@ export default function CustomDropDown({
 					return (
 						<li key={index}>
 							<span
-								className="dropdown-item hover:tw-to-black-10 tw-flex tw-items-center tw-justify-between tw-transition-all"
+								className="dropdown-item tw-flex tw-items-center tw-justify-between tw-transition-all hover:tw-to-black-10"
 								onClick={() => handleDropDownChange(optionObj, setOption)}>
 								{optionObj.optionTitle}{" "}
 								{currentOption.optionTitle === optionObj.optionTitle && (
@@ -44,8 +44,19 @@ export default function CustomDropDown({
 	);
 }
 CustomDropDown.propTypes = {
-	dropDownOptions: PropTypes.object,
-	currentOption: PropTypes.object,
+	dropDownOptions: PropTypes.shape({
+		dropDownTitle: PropTypes.string.isRequired,
+		options: PropTypes.arrayOf(
+			PropTypes.shape({
+				optionTitle: PropTypes.string.isRequired,
+				searchParams: PropTypes.object.isRequired,
+			})
+		).isRequired,
+	}),
+	currentOption: PropTypes.shape({
+		optionTitle: PropTypes.string.isRequired,
+		searchParams: PropTypes.object.isRequired,
+	}),
 	setOption: PropTypes.func,
 	handleDropDownChange: PropTypes.func,
 };

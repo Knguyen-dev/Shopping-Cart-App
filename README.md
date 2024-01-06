@@ -1,17 +1,34 @@
-# React + Vite
+# GamerCity, A mock shopping application
+- Imitates an eccomerce website with a shopping cart. In this case the user
+  is shopping for video games. Video game data provided by Rawg API. However since our 
+  api doesn't provide prices for the games, we hard-coded those in our fetch calls to simulate 
+  us actually getting the prices. Again this isn't a real shopping platform, just a pretend one.
 
-/*
-- BOOK MARK: 
-5. Set up user page page, just have simple username thing and theme toggling button.
 
-7. Before setting up dark theme, I think we should clean up our css. Try to keep most of our tailwind
-  classes in the markup of components. Then and dark theme, and protected routes. Also should set up smart redirects as well.
++ Features:
+1. Increase or decrease quantity in shopping cart, removing items from shopping cart.
+2. Filter or order products via different categories.
+3. Searching for products on any page. 
+4. Protected routing and mock authentication.
 
-8. Set up dark theme and theme toggling. Theme changing should not affect the login or registration 
-pages, they should only affect pages that have bene umbrellad under AppLayout.
 
-9. A 'gif' loader instead of 'loading...' would be nice using svg and css animations as 
-Alex's example used "<svg crossorigin="anonymous" viewBox="25 25 50 50" class="go6123017 "><circle class="go1299843785" cx="50" cy="50" r="20"></circle></svg>"
-which would be just svg and css animations.
-DEV NOTE: Numbers 5 or 6 must use useContext, probably going to be 5.
-*/
++ How to use:
+1. Before you can add games to your cart, login on the login page.
+  Use any email and password, and it will 'login' for you.
+2. Now you can add and remove stuff from your cart. Go
+  to the cart page to see your cart. Note you can't 
+  checkout your cart as this is just a pretend ecommerce site.
+
++ Tech used:
+1. Vite and React (Project setup)
+2. React Router Dom (Client side routing)
+3. Tailwindcss (For easy styling) and Boostrap (Components)
+
+
++ Design Inspirations and credits:
+1. Rawg API: https://rawg.io/apidocs
+2. Alex Dishen's Game Harbor: https://alex-dishen.github.io/game-harbor/
+3. Odin Project: https://www.theodinproject.com/lessons/node-path-react-new-shopping-cart
+
+
++ Deploying via nellify

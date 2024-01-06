@@ -9,6 +9,18 @@
 	box-sizing: border-box;
 }
 
+/*
++ Font Face: 
+- A CSS rule that allows us to define custom fonts to use for a website.
+1. 'font-family': We define the name we'll be using for our custom font in our css.
+2 src: Specifies the sources of our font files. 'local()' finds the font on the user's 
+  device, but if these aren't found, we fallback to loading hte fonts from provided 
+  urls.
+3. font-weight and font-style: Here we are specifying the weight and styles of our specific
+  fonts. So 'GT Walsheim Pro' will be a regular font weight and normal font style.
+
+
+*/
 @font-face {
 	font-family: GT Walsheim Pro;
 	src:
@@ -28,7 +40,7 @@
 	src:
 		local("GT Walsheim Pro Bold"),
 		local("GTWalsheimProBold"),
-		url(GTWalsheimProBold.woff2) format("woff2"),
+		url("./assets/fonts/GTWalsheimPro/GTWalsheimProBold.woff2") format("woff2"),
 		url("./assets/fonts/GTWalsheimPro/GTWalsheimProBold.woff") format("woff"),
 		url("./assets/fonts/GTWalsheimPro/GTWalsheimProBold.ttf") format("truetype");
 	font-weight: 700;
@@ -92,11 +104,4 @@ a:hover {
 
 body {
 	font-family: var(--font-family);
-}
-
-.position-centered {
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
 }

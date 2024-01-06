@@ -1,3 +1,6 @@
+/*
++ RegisterForm: Registration form component used in user registration page.
+*/
 import FloatingInput from "./FloatingInput";
 export default function RegisterForm() {
 	return (

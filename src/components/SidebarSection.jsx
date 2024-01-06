@@ -9,7 +9,10 @@ function SidebarTab({ tabObj, onClick, isActive }) {
 	);
 }
 SidebarTab.propTypes = {
-	tabObj: PropTypes.object,
+	tabObj: PropTypes.shape({
+		tabTitle: PropTypes.string,
+		icon: PropTypes.element,
+	}),
 	onClick: PropTypes.func,
 	isActive: PropTypes.bool,
 };
@@ -42,7 +45,15 @@ export default function SidebarSection({
 	);
 }
 SidebarSection.propTypes = {
-	sectionObj: PropTypes.object,
+	sectionObj: PropTypes.shape({
+		sectionTitle: PropTypes.string,
+		tabs: PropTypes.arrayOf(
+			PropTypes.shape({
+				tabTitle: PropTypes.string,
+				icon: PropTypes.element,
+			})
+		),
+	}),
 	activeTabID: PropTypes.string,
 	onTabClick: PropTypes.func,
 	className: PropTypes.string,

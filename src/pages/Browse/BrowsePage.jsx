@@ -11,8 +11,8 @@ import "../../styles/BrowsingPage.css";
 import GameCard from "../../components/GameCard";
 import CustomDropDown from "../../components/CustomDropDown";
 import SidebarSection from "../../components/SidebarSection";
-import { useCartContext } from "../utilities/hooks.jsx";
-import { useAuthContext } from "../ContextProviders/AuthProvider.jsx";
+import { useCartContext } from "../ContextProviders/hooks/useCartContext.jsx";
+import { useAuthContext } from "../ContextProviders/hooks/useAuthContext.jsx";
 
 export default function BrowsingPage({
 	activeTab,

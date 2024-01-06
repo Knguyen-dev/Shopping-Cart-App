@@ -21,7 +21,6 @@ import { GoTrophy } from "react-icons/go";
 import { BsGraphUpArrow, BsNintendoSwitch } from "react-icons/bs";
 import { LuSwords } from "react-icons/lu";
 import { FaGun, FaGear } from "react-icons/fa6";
-import { CiLogout } from "react-icons/ci";
 import { createDateModule } from "./utilities";
 
 const dateModule = createDateModule();
@@ -160,10 +159,6 @@ export const accountSidebarSections = [
 			{
 				tabTitle: "Account Settings",
 				icon: <FaGear />,
-			},
-			{
-				tabTitle: "Sign Out",
-				icon: <CiLogout />,
 			},
 		],
 	},
@@ -328,6 +323,7 @@ export const baseURL = "https://api.rawg.io/api/games";
 // Small breakpoint for screens (in pixels)
 export const SMALL_BREAKPOINT = 640;
 
+// Action keywords for useReducer in useShoppingCart hook.
 export const CART_ACTIONS = {
 	addToCart: "ADD_TO_CART",
 	removeFromCart: "REMOVE_FROM_CART",

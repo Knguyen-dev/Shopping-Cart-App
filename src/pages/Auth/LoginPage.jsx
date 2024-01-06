@@ -1,5 +1,5 @@
 import LoginForm from "../../components/LoginForm";
-import { useAuthContext } from "../ContextProviders/AuthProvider";
+import { useAuthContext } from "../ContextProviders/hooks/useAuthContext";
 import { NavLink } from "react-router-dom";
 
 export default function LoginPage() {
