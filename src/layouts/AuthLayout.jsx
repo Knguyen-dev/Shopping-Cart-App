@@ -1,18 +1,31 @@
 import { Footer } from "./AppLayout";
 import { Outlet } from "react-router";
+
+import { Typography, Grid } from "@mui/material";
 import "../styles/AuthLayout.css";
 
 // Layout for the auth section for our website.
 export default function AuthLayout() {
 	return (
 		<div className="tw-flex tw-min-h-screen tw-flex-col">
-			<main className="tw-flex tw-flex-auto tw-flex-col tw-items-center tw-justify-center tw-gap-y-6 tw-py-10 tw-text-center md:tw-flex-row md:tw-gap-x-20">
-				<div className="">
-					<h1 className="tw-mb-2 tw-text-5xl">GamerCity</h1>
-					<p>Connect with gamers around the world!</p>
-				</div>
-				<Outlet />
-			</main>
+			<Grid
+				container
+				className="tw-mb-4 tw-flex-auto tw-items-center tw-justify-center md:tw-gap-x-2">
+				<Grid
+					xs={12}
+					md={4}
+					item
+					// Basically on 0 to medium, margin top auto, but anything above no margin top
+					className="tw-text-center xs:max-md:tw-mt-auto">
+					<Typography variant="h2">GamerCity</Typography>
+					<Typography variant="p">
+						Connect with gamers around the world!
+					</Typography>
+				</Grid>
+				<Grid xs={8} md={4} item>
+					<Outlet />
+				</Grid>
+			</Grid>
 			<Footer />
 		</div>
 	);

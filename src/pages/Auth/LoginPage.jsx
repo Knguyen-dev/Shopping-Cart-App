@@ -1,21 +1,27 @@
 import LoginForm from "../../components/LoginForm";
 import { useAuthContext } from "../ContextProviders/hooks/useAuthContext";
-import { NavLink } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { Button } from "@mui/material";
 
 export default function LoginPage() {
 	const auth = useAuthContext();
+	const navigate = useNavigate();
 	return (
-		<div className="tw-w-1/2 tw-px-4 tw-py-6 md:tw-w-1/3">
+		<div>
 			{/* Login form itself */}
 			<LoginForm onSubmit={auth.onLogin} />
 
 			{/* Bottom section contining extra extra links */}
-			<div className="tw-flex tw-flex-col tw-gap-y-2">
+			<div className="tw-flex tw-flex-col tw-gap-y-2 tw-text-center">
 				<a href="#">Forgot Password?</a>
 				<hr></hr>
-				<div className="tw-self-center tw-rounded-md tw-bg-emerald-500 tw-px-5 tw-py-3 tw-font-bold tw-text-white">
-					<NavLink to="/auth">Create New Account</NavLink>
-				</div>
+				<Button
+					onClick={() => navigate("/auth")}
+					variant="contained"
+					color="success"
+					className="tw-self-center tw-py-3 tw-font-bold">
+					Create New Account
+				</Button>
 			</div>
 		</div>
 	);

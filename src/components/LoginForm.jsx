@@ -1,6 +1,7 @@
 import PropTypes from "prop-types";
-import FloatingInput from "./FloatingInput";
 
+import { TextField, Button } from "@mui/material";
+import PasswordField from "./common/PasswordField/PasswordField";
 /*
 + LoginForm: Component that represents the login form used on the 
   login page.
@@ -10,25 +11,28 @@ export default function LoginForm({ onSubmit }) {
 	return (
 		<form id="login-form" onSubmit={onSubmit}>
 			<div className="tw-mb-4 tw-flex tw-flex-col tw-gap-y-3">
-				<FloatingInput
-					labelText="Email:"
-					id="login-email"
-					type="email"
-					placeholder="Email:"
-					required={true}
+				<TextField
+					name="email"
+					label="Email"
+					variant="outlined"
+					placeholder="Email"
+					required
 				/>
-				<FloatingInput
-					labelText="Password:"
-					id="login-password"
-					type="password"
-					placeholder="Password:"
-					required={true}
+
+				<PasswordField
+					name="password"
+					label="Password"
+					variant="outlined"
+					placeholder="Password"
 				/>
-				<button
-					className="tw-rounded-md tw-bg-blue-500 tw-py-3 tw-font-bold tw-text-white"
-					type="submit">
+
+				<Button
+					variant="contained"
+					type="submit"
+					color="primary"
+					className="tw-py-3 tw-font-bold">
 					Log In
-				</button>
+				</Button>
 			</div>
 		</form>
 	);
