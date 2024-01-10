@@ -10,7 +10,9 @@ export default function PasswordField({
 	name = "password",
 	placeholder = "Password",
 	label = "Password",
+	value,
 	helperText,
+	error = false,
 	onChange,
 }) {
 	const [showPassword, setShowPassword] = useState(false);
@@ -24,6 +26,8 @@ export default function PasswordField({
 			helperText={helperText}
 			variant={variant}
 			onChange={onChange}
+			value={value}
+			error={error}
 			type={showPassword ? "text" : "password"}
 			InputProps={{
 				endAdornment: (
@@ -38,7 +42,6 @@ export default function PasswordField({
 					</InputAdornment>
 				),
 			}}
-			required
 		/>
 	);
 }
@@ -47,6 +50,8 @@ PasswordField.propTypes = {
 	name: PropTypes.string,
 	placeholder: PropTypes.string,
 	label: PropTypes.string,
+	value: PropTypes.string,
 	helperText: PropTypes.string,
+	error: PropTypes.bool,
 	onChange: PropTypes.func,
 };

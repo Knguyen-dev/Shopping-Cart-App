@@ -94,7 +94,7 @@ export default function GameCard({
 					<span className="game-price">${gameObj.price}</span>
 				</div>
 
-				{/* List of icons for hte platforms */}
+				{/* List of icons for the platforms */}
 				<ul className="tw-flex tw-gap-x-3">
 					{platformIcons.map((icon, index) => (
 						<li key={index}>{icon}</li>

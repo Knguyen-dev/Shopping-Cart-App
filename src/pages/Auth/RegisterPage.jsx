@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import RegisterForm from "../../components/RegisterForm";
+import RegisterForm from "../../components/forms/RegisterForm";
 import { Typography, Link, Box } from "@mui/material";
 export default function RegisterPage() {
 	const navigate = useNavigate();

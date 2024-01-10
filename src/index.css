@@ -8,6 +8,13 @@
 	box-sizing: border-box;
 }
 
+ul,
+li {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
 /*
 + Font Face: 
 - A CSS rule that allows us to define custom fonts to use for a website.
@@ -102,5 +109,7 @@ a:hover {
 }
 
 body {
+	/* Inherit margin settings of 0 from top rule */
+	margin: inherit;
 	font-family: var(--font-family);
 }

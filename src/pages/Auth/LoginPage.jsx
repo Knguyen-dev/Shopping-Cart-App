@@ -1,4 +1,4 @@
-import LoginForm from "../../components/LoginForm";
+import LoginForm from "../../components/forms/LoginForm";
 import { useAuthContext } from "../ContextProviders/hooks/useAuthContext";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@mui/material";
