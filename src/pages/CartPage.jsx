@@ -6,7 +6,7 @@
   here, we'll just use an array and such since we're making up our prices
 
 */
-
+import { Button, ButtonGroup, Typography, Box } from "@mui/material";
 import { useCartContext } from "./ContextProviders/hooks/useCartContext";
 import "../styles/CartPage.css";
 export default function CartPage() {
@@ -39,10 +39,10 @@ export default function CartPage() {
 	return (
 		<div className="tw-px-12 tw-py-4">
 			{/* Cart page header */}
-			<header className="tw-mb-2 tw-text-2xl tw-font-bold">
-				<h1>
-					Cart <span className="tw-text-gray-400">({cartQuantity} items)</span>
-				</h1>
+			<header className="tw-mb-4">
+				<Typography variant="h3" className="tw-font-bold">
+					Cart ({cartQuantity} items)
+				</Typography>
 			</header>
 
 			{/* Main content for cart page */}
@@ -66,9 +66,16 @@ export default function CartPage() {
 								</div>
 								{/* Cart item's main content */}
 								<div className="tw-flex tw-flex-1 tw-flex-col tw-justify-between">
-									<div className="tw-text-md tw-flex tw-justify-between lg:tw-text-xl">
-										<span className="tw-w-3/4">{gameObj.name}</span>
-										<span className="tw-font-bold">${gameObj.price}</span>
+									<div className="tw-flex tw-justify-between">
+										<Typography variant="span" className="tw-w-3/4">{`${
+											gameObj.name
+										} (${
+											itemQuantity === MAX_QUANTITY ? "Max Qty" : "Qty"
+										}: ${itemQuantity})`}</Typography>
+
+										<Typography variant="span" fontWeight="700">
+											${gameObj.price}
+										</Typography>
 									</div>
 
 									{/*
@@ -79,66 +86,72 @@ export default function CartPage() {
                   quantity is <= our MIN_QUANTITY, and we do similar logic for 
                   our MAX_QUANTITY. 
                      */}
-									<div className="tw-mt-4 tw-flex tw-flex-col-reverse tw-gap-x-4 tw-gap-y-4 lg:tw-flex-row">
-										<button
-											className="btn btn-outline-danger tw-transition-all"
+									<Box className="tw-mt-4 tw-flex tw-gap-x-4 tw-gap-y-4">
+										<Button
+											variant="contained"
+											className="tw-bg-red-700"
 											onClick={() => shoppingCart.removeFromCart(gameObj.id)}>
 											Remove
-										</button>
-
-										<div className="input-group">
-											<button
-												className="btn btn-outline-primary tw-transition-all"
+										</Button>
+										<ButtonGroup>
+											<Button
 												onClick={() =>
 													handleDecreaseQuantity(gameObj.id, itemQuantity)
 												}
 												disabled={itemQuantity <= MIN_QUANTITY}>
 												Down
-											</button>
-											<span className="input-group-text border-primary tw-justify-center tw-bg-transparent tw-text-white">
-												{itemQuantity === MAX_QUANTITY
-													? `Max Qty: ${itemQuantity}`
-													: `Qty: ${itemQuantity}`}
-											</span>
-											<button
-												className="btn btn-outline-primary tw-transition-all"
+											</Button>
+											<Button
 												onClick={() =>
 													handleIncreaseQuantity(gameObj.id, itemQuantity)
 												}
 												disabled={itemQuantity >= MAX_QUANTITY}>
 												Up
-											</button>
-										</div>
-									</div>
+											</Button>
+										</ButtonGroup>
+									</Box>
 								</div>
 							</div>
 						);
 					})}
 				</div>
+
 				{/* Sidebar for the cart page */}
 				<div className="cart-page-sidebar tw-mb-4 md:tw-sticky md:tw-top-4 md:tw-self-start">
 					{/* Subtotal section */}
 					<div className="custom-section tw-flex tw-flex-col tw-gap-y-1">
-						<div className="tw-flex tw-justify-between tw-text-lg">
-							<span className="tw-w-3/4">Subtotal ({cartQuantity} items)</span>
-							<span>${subtotal}</span>
-						</div>
-						<div className="tw-flex tw-justify-between tw-text-gray-300">
-							<span>Shipping</span>
-							<span>Free</span>
-						</div>
-						<div className="tw-flex tw-justify-between">
-							<span className="tw-font-bold">Taxes</span>
-							<span>Calculated at checkout</span>
-						</div>
-						<div className="tw-flex tw-justify-between tw-font-bold">
-							<span>Estimated Total</span>
-							<span>${subtotal}</span>
-						</div>
+						{/* Subtotal */}
+						<Box className="tw-flex tw-justify-between tw-text-lg">
+							<Typography className="tw-w-3/4">
+								Subtotal ({cartQuantity} items)
+							</Typography>
+							<Typography>${subtotal}</Typography>
+						</Box>
 
-						<button className="btn btn-primary tw-my-3 tw-rounded-full">
-							Continue to checkout
-						</button>
+						{/* Shipping */}
+						<Box className="tw-flex tw-justify-between">
+							<Typography variant="span">Shipping</Typography>
+							<Typography variant="span">Free</Typography>
+						</Box>
+
+						{/* Tax */}
+						<Box className="tw-flex tw-justify-between">
+							<Typography variant="span">Taxes</Typography>
+							<Typography variant="span">Calculated at checkout</Typography>
+						</Box>
+
+						{/* Estimated Total */}
+						<Box className="tw-flex tw-justify-between tw-font-bold">
+							<Typography>Estimated Total</Typography>
+							<Typography>${subtotal}</Typography>
+						</Box>
+
+						<Button
+							color="primary"
+							variant="contained"
+							className="tw-mt-3 tw-rounded-full">
+							Continue to Checkout
+						</Button>
 					</div>
 				</div>
 			</main>

@@ -12,9 +12,11 @@
   at least the content will be comfortably visible.
 */
 
-// Card for games
-import { FaCheck, FaPlus } from "react-icons/fa6";
+import { Button, Typography } from "@mui/material";
+import CheckIcon from "@mui/icons-material/Check";
+import AddIcon from "@mui/icons-material/Add";
 import { platform_map, icon_map } from "../pages/utilities/constants";
+import notFoundimg from "../assets/images/image-not-found.png";
 import PropTypes from "prop-types";
 
 export default function GameCard({
@@ -64,7 +66,9 @@ export default function GameCard({
 			<div className="tw-h-1/2">
 				<img
 					className="tw-h-full tw-w-full tw-object-cover"
-					src={gameObj.background_image}
+					src={
+						gameObj.background_image ? gameObj.background_image : notFoundimg
+					}
 					alt="Game Cover Image"
 				/>
 			</div>
@@ -72,26 +76,20 @@ export default function GameCard({
 			{/* Body of the card */}
 			<div className="tw-flex tw-flex-1 tw-flex-col tw-justify-evenly tw-px-4 tw-py-2">
 				<div className="tw-mb-4 tw-flex tw-items-center tw-justify-between tw-text-slate-400">
-					<button
-						className="tw-flex tw-items-center tw-gap-x-2 tw-rounded-md tw-bg-slate-800 tw-px-4 tw-py-2"
+					{/* Toggle add to cart button */}
+					<Button
+						variant="contained"
+						color="primaryDark"
 						onClick={(e) => {
-							// Stop event propagation to prevent onCardClick from triggering
 							e.stopPropagation();
 							shoppingCartClick();
-						}}>
-						{isInCart ? (
-							<>
-								<FaCheck />
-								<span>Added</span>
-							</>
-						) : (
-							<>
-								<FaPlus />
-								<span>Add to cart</span>
-							</>
-						)}
-					</button>
-					<span className="game-price">${gameObj.price}</span>
+						}}
+						startIcon={isInCart ? <CheckIcon /> : <AddIcon />}>
+						{isInCart ? "Added" : "Add to Cart"}
+					</Button>
+
+					{/* Price of game */}
+					<Typography variant="p">${gameObj.price}</Typography>
 				</div>
 
 				{/* List of icons for the platforms */}
@@ -102,7 +100,7 @@ export default function GameCard({
 				</ul>
 
 				{/* Title of the card, which will have title of the game */}
-				<h1 className="tw-mt-auto tw-text-xl">{gameObj.name}</h1>
+				<Typography variant="h6">{gameObj.name}</Typography>
 			</div>
 		</div>
 	);

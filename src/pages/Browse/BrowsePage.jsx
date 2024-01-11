@@ -1,3 +1,4 @@
+import { Button, Typography, Box, CircularProgress } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
@@ -9,6 +10,7 @@ import {
 } from "../utilities/constants.jsx";
 import "../../styles/BrowsingPage.css";
 import GameCard from "../../components/GameCard";
+
 import CustomDropDown from "../../components/CustomDropDown";
 import SidebarSection from "../../components/SidebarSection";
 import { useCartContext } from "../ContextProviders/hooks/useCartContext.jsx";
@@ -26,7 +28,7 @@ export default function BrowsingPage({
 	useDefault,
 	loadInitialBrowsePage,
 	onTabClick,
-	handleDropDownChange,
+	onDropDownChange,
 }) {
 	const [sidebarHidden, setSidebarHidden] = useState(false);
 	const navigate = useNavigate();
@@ -91,35 +93,36 @@ export default function BrowsingPage({
 			</div>
 
 			{/* Toggle sidebar button for mobile screens */}
-			<button
-				className="tw-fixed tw-bottom-5 tw-right-5 tw-z-20 tw-rounded-full tw-bg-white tw-p-3 tw-text-black sm:tw-hidden"
+			<Button
+				variant="contained"
+				className="tw-fixed tw-bottom-5 tw-right-5 tw-z-20 sm:tw-hidden"
 				onClick={() => setSidebarHidden((state) => !state)}>
 				{sidebarHidden ? "Show" : "Hide"}
-			</button>
+			</Button>
 
 			{/* Main section for the browsing page that has drop downs and game cards  */}
 			<main className="browsing-main tw-px-4 tw-text-white">
 				{/* Header with the the  drop downs and tab title*/}
 				<header className="tw-mb-2">
-					<h1 className="tw-mb-2 tw-text-4xl tw-font-medium">
+					<Typography variant="h4" className="tw-mb-2">
 						{activeTab.tabTitle}
-					</h1>
-					<div className="tw-flex tw-gap-x-2">
+					</Typography>
+					<Box className="tw-flex tw-flex-col tw-gap-2 sm:tw-flex-row">
 						{!activeTab.ignoreOrderDropDown && (
 							<CustomDropDown
 								dropDownOptions={orderingOptions}
 								currentOption={itemOrder}
 								setOption={setItemOrder}
-								handleDropDownChange={handleDropDownChange}
+								onDropDownChange={onDropDownChange}
 							/>
 						)}
 						<CustomDropDown
 							dropDownOptions={platformOptions}
 							currentOption={platform}
 							setOption={setPlatform}
-							handleDropDownChange={handleDropDownChange}
+							onDropDownChange={onDropDownChange}
 						/>
-					</div>
+					</Box>
 				</header>
 
 				{/* 
@@ -131,8 +134,8 @@ export default function BrowsingPage({
         4. In this case, some games were found so we render them.
         */}
 				{isLoading ? (
-					<div className="tw-flex tw-h-full tw-flex-col tw-items-center tw-justify-center tw-text-3xl">
-						<p>Loading your games!</p>
+					<div className="tw-flex tw-h-full tw-items-center tw-justify-center">
+						<CircularProgress />
 					</div>
 				) : searchError ? (
 					<div className="tw-flex tw-h-full tw-flex-col tw-items-center tw-justify-center tw-text-3xl">
@@ -182,6 +185,6 @@ BrowsingPage.propTypes = {
 	useDefault: PropTypes.bool,
 	loadInitialBrowsePage: PropTypes.func,
 	onTabClick: PropTypes.func,
-	handleDropDownChange: PropTypes.func,
+	onDropDownChange: PropTypes.func,
 	cartItems: PropTypes.array,
 };

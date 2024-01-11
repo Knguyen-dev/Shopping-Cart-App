@@ -1,18 +1,27 @@
+import { Button, Box, Typography, Grid, Skeleton } from "@mui/material";
+
 import { useNavigate, useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { fetchGameDetails, fetchGameImages } from "../utilities/requests";
 import Carousel from "../../components/Carousel";
 import "../../styles/GameDetailsPage.css";
 import notFoundImg from "../../assets/images/image-not-found.png";
-import { FaChevronUp, FaChevronDown, FaArrowLeft } from "react-icons/fa";
-import { FaCheck, FaPlus } from "react-icons/fa6";
+
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import ExpandLessIcon from "@mui/icons-material/ExpandLess";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import AddIcon from "@mui/icons-material/Add";
+import CheckIcon from "@mui/icons-material/Check";
+
 import { useCartContext } from "../ContextProviders/hooks/useCartContext.jsx";
 import { useAuthContext } from "../ContextProviders/hooks/useAuthContext.jsx";
 
 const useGameData = (slug) => {
 	const [gameDetails, setGameDetails] = useState();
+	const [detailsLoading, setDetailsLoading] = useState(true);
 	const [gameDetailsError, setGameDetailsError] = useState(false);
 	const [gameImages, setGameImages] = useState();
+	const [imagesLoading, setImagesLoading] = useState(true);
 	const [gameImagesError, setGameImagesError] = useState(false);
 	useEffect(() => {
 		const getGameInfo = () => {
@@ -24,6 +33,9 @@ const useGameData = (slug) => {
 				.catch((error) => {
 					setGameDetailsError(true);
 					console.error("Game Details Error: ", error);
+				})
+				.finally(() => {
+					setDetailsLoading(false);
 				});
 
 			// Fetches screenshots for the game
@@ -34,14 +46,38 @@ const useGameData = (slug) => {
 				.catch((error) => {
 					setGameImagesError(true);
 					console.error("Game Images Error: ", error);
+				})
+				.finally(() => {
+					setImagesLoading(false);
 				});
 		};
 		getGameInfo();
 	}, [slug]);
-	return { gameDetails, gameDetailsError, gameImages, gameImagesError };
+	return {
+		gameDetails,
+		detailsLoading,
+		gameDetailsError,
+		gameImages,
+		imagesLoading,
+		gameImagesError,
+	};
 };
 
 /* 
+BOOK MARK: Done converting the flexbox to Mui grid.
+1. Fix colors on browsing page
+
+2. Fix the cart page
+
+2. You could also change cart page to grid, but the flexbox format 
+  that we did for it is pretty simple and it's better having minWidth.
+
+
+3. After adding skeletons let's work on colors and theme toggling.
+  We can probably use some preset theme colors like 'ochre' to play
+  around with. I want to be able to get full control of how to do that.
+
+
 + NOTE: We can treat 'gameDetails' as the same as gameObj, as this object just 
 has more information. Of course in a real world situation we'd probably just 
 query our item from a database, but since this is just a mock application, 
@@ -50,8 +86,14 @@ doing this is acceptable even if the objects aren't the same.
 
 export default function GameDetailsPage() {
 	const { slug } = useParams();
-	const { gameDetails, gameDetailsError, gameImages, gameImagesError } =
-		useGameData(slug);
+	const {
+		gameDetails,
+		detailsLoading,
+		gameDetailsError,
+		gameImages,
+		imagesLoading,
+		gameImagesError,
+	} = useGameData(slug);
 	const [isExpanded, setIsExpanded] = useState(false);
 	const navigate = useNavigate();
 	const auth = useAuthContext();
@@ -99,125 +141,162 @@ export default function GameDetailsPage() {
 				</p>
 			</div>
 		);
-	} else if (!gameDetails || !gameImages) {
-		// Wait until we have both until we can render
-		return (
-			<div className="tw-flex tw-h-full tw-flex-col tw-items-center tw-justify-center tw-text-center tw-text-3xl">
-				<p>Loading Game Details...</p>
-			</div>
-		);
 	}
 
 	return (
 		<div className="tw-px-12 tw-py-4 tw-text-white">
 			{/* Header that has game title and back button link */}
 			<header className="tw-mb-3 tw-flex tw-flex-col tw-items-center tw-justify-between tw-font-bold md:tw-flex-row">
-				<button
-					onClick={handleBackBtnClick}
-					className="tw-flex tw-items-center tw-gap-x-2">
-					<FaArrowLeft />
-					<span className="tw-text-xl">Back to Harbor</span>
-				</button>
-				<h1 className="tw-text-3xl md:tw-text-5xl">
-					{gameDetails && gameDetails.name}
-				</h1>
+				<Button
+					variant="outlined"
+					startIcon={<ArrowBackIcon />}
+					onClick={handleBackBtnClick}>
+					Back to Browsing
+				</Button>
+
+				{/* Name of the game, render skeleton while loading. */}
+				<Typography
+					variant="h4"
+					className="tw-w-full tw-text-center xs:max-md:tw-my-4 md:tw-w-2/5 md:tw-text-end">
+					{detailsLoading ? (
+						<Skeleton sx={{ bgcolor: "grey.900", height: "75px" }} />
+					) : (
+						gameDetails.name
+					)}
+				</Typography>
 			</header>
 
 			{/* Main content for game details page */}
-			<main className="tw-flex tw-flex-col tw-gap-4 md:tw-flex-row">
+			<Grid container spacing={2} className="tw-justify-center">
 				{/* Game Image section: if background image doesn't exist, we'll just not 
           render the carousel. */}
-				<div className="game-image-section">
-					{gameDetails.background_image === notFoundImg ? (
-						<img
-							className="tw-h-full"
-							src={gameDetails.background_image}
-							alt="Game Images Not Found"
-						/>
-					) : (
-						<Carousel images={[gameDetails.background_image, ...gameImages]} />
-					)}
-				</div>
+				<Grid item xs={12} md={8}>
+					{
+						// If loading render skeleton that represents the image carousel
+						imagesLoading ? (
+							<Skeleton
+								variant="rectangular"
+								sx={{ bgcolor: "grey.900" }}
+								className="tw-h-full tw-min-h-80"
+							/>
+						) : // Else finished fetch, but no images found
+						gameImages.length === 0 ? (
+							<img
+								className="tw-h-full tw-min-h-80"
+								src={notFoundImg}
+								alt="Game Images Not Found"
+							/>
+						) : (
+							// Finished fetch and images were found
+							<Carousel images={[...gameImages]} />
+						)
+					}
+				</Grid>
 
 				{/* Game details sidebar */}
-				<div className="game-details-sidebar">
-					<div className="game-info">
-						<div className="game-info-top">
-							<h1 className="tw-mb-2 tw-text-xl tw-font-bold tw-text-white">
+				<Grid
+					item
+					xs={12}
+					md={4}
+					className="tw-flex tw-flex-col-reverse tw-gap-y-2 md:tw-flex-col">
+					<Box className="game-info">
+						{/* Description of game */}
+						<Box className="game-info-top">
+							<Typography
+								variant="h5"
+								className="tw-mb-2 tw-font-bold tw-text-white">
 								Description
-							</h1>
-							<p>{gameDetails.description}</p>
-						</div>
-						<div className={`game-info-bottom ${isExpanded && "open"}`}>
-							<div className="flow-div">
-								<span>
-									Website:{" "}
-									{gameDetails.website ? (
-										<a
-											href={gameDetails.website}
-											target="_blank"
-											rel="noreferrer">
-											{gameDetails.website}
-										</a>
-									) : (
-										"N/A"
-									)}
-								</span>
-								{generateListMarkup("Platforms", gameDetails.platforms)}
-								{generateListMarkup("Genres", gameDetails.genres)}
-								{generateListMarkup("Developers", gameDetails.developers)}
-								{generateListMarkup("Publishers", gameDetails.publishers)}
-							</div>
-
-							{/* Toggle button for expanding game info section */}
-							<button
-								className="tw-ml-auto tw-flex tw-items-center tw-gap-x-2 tw-text-lg"
-								onClick={() => setIsExpanded((state) => !state)}>
-								{isExpanded ? (
+							</Typography>
+							{/* Render skeletons to imitate description while loading */}
+							<Typography variant="p">
+								{detailsLoading ? (
 									<>
-										<FaChevronUp />
-										<span>Less</span>
+										<Skeleton variant="text" sx={{ bgcolor: "grey.900" }} />
+										<Skeleton variant="text" sx={{ bgcolor: "grey.900" }} />
+										<Skeleton variant="text" sx={{ bgcolor: "grey.900" }} />
+										<Skeleton variant="text" sx={{ bgcolor: "grey.900" }} />
+										<Skeleton variant="text" sx={{ bgcolor: "grey.900" }} />
+									</>
+								) : (
+									gameDetails.description
+								)}
+							</Typography>
+						</Box>
+						{/* More info section, only render markup when we finish loading */}
+						{!detailsLoading && (
+							<Box className={`game-info-bottom ${isExpanded && "open"}`}>
+								<Box className="flow-div">
+									<span>
+										Website:{" "}
+										{gameDetails.website ? (
+											<a
+												href={gameDetails.website}
+												target="_blank"
+												rel="noreferrer">
+												{gameDetails.website}
+											</a>
+										) : (
+											"N/A"
+										)}
+									</span>
+									{generateListMarkup("Platforms", gameDetails.platforms)}
+									{generateListMarkup("Genres", gameDetails.genres)}
+									{generateListMarkup("Developers", gameDetails.developers)}
+									{generateListMarkup("Publishers", gameDetails.publishers)}
+								</Box>
+								{/* Toggle button for expanding game info section */}
+								<Button
+									variant="contained"
+									color="secondaryDark"
+									onClick={() => setIsExpanded((state) => !state)}
+									startIcon={
+										isExpanded ? <ExpandLessIcon /> : <ExpandMoreIcon />
+									}
+									disabled={detailsLoading}
+									className="tw-ml-auto">
+									{isExpanded ? "Less" : "More"}
+								</Button>
+							</Box>
+						)}
+					</Box>
+
+					{/* Add to cart button. Same logic as in BrowsePage, check if authenticated before letting
+            user add the item to their cart. Render skeleton while loading */}
+					{detailsLoading ? (
+						<Skeleton sx={{ bgcolor: "grey.900", height: "50px" }} />
+					) : (
+						<Button
+							variant="contained"
+							className="tw-w-full tw-py-4"
+							disabled={detailsLoading}
+							color="secondaryDark"
+							onClick={() => {
+								if (!auth.token) {
+									navigate("/auth/login", {
+										state: { from: location.pathname },
+									});
+								} else {
+									shoppingCart.handleCartClick(gameDetails);
+								}
+							}}>
+							<Typography variant="span">${gameDetails.price}</Typography>
+							<Box className="tw-ml-auto tw-flex tw-items-end">
+								{shoppingCart.isInCart(gameDetails.id) ? (
+									<>
+										<CheckIcon />
+										<Typography>Added</Typography>
 									</>
 								) : (
 									<>
-										<FaChevronDown />
-										<span>More</span>
+										<AddIcon />
+										<Typography>Add to cart</Typography>
 									</>
 								)}
-							</button>
-						</div>
-					</div>
-
-					{/* Add to cart button. Same logic as in BrowsePage, check if authenticated before letting
-            user add the item to their cart */}
-					<button
-						className="tw-flex tw-justify-between tw-rounded-lg tw-bg-gray-800 tw-px-6 tw-py-4 tw-text-2xl"
-						onClick={() => {
-							if (!auth.token) {
-								navigate("/auth/login", {
-									state: { from: location.pathname },
-								});
-							} else {
-								shoppingCart.handleCartClick(gameDetails);
-							}
-						}}>
-						<span>${gameDetails.price}</span>
-						<div className="tw-flex tw-items-center tw-gap-x-2">
-							{shoppingCart.isInCart(gameDetails.id) ? (
-								<>
-									<FaCheck />
-									<span>Added</span>
-								</>
-							) : (
-								<>
-									<FaPlus />
-									<span>Add to cart</span>
-								</>
-							)}
-						</div>
-					</button>
-				</div>
-			</main>
+							</Box>
+						</Button>
+					)}
+				</Grid>
+			</Grid>
 		</div>
 	);
 }

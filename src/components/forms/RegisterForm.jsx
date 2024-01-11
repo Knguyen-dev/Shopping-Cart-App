@@ -74,6 +74,7 @@ export default function RegisterForm() {
 					onChange={handleChange}
 					error={formErrors.username ? true : false}
 					helperText={formErrors.username && formErrors.username}
+					required
 				/>
 				<TextField
 					type="email"
@@ -85,6 +86,7 @@ export default function RegisterForm() {
 					onChange={handleChange}
 					error={formErrors.email ? true : false}
 					helperText={formErrors.email && formErrors.email}
+					required
 				/>
 				<PasswordField
 					variant="outlined"
@@ -95,6 +97,7 @@ export default function RegisterForm() {
 					onChange={handleChange}
 					error={formErrors.password ? true : false}
 					helperText={formErrors.password && formErrors.password}
+					required
 				/>
 				<TextField
 					type="password"
@@ -106,6 +109,7 @@ export default function RegisterForm() {
 					onChange={handleChange}
 					error={formErrors.confirmPassword ? true : false}
 					helperText={formErrors.confirmPassword && formErrors.confirmPassword}
+					required
 				/>
 				<Button
 					variant="contained"

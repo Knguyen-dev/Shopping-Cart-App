@@ -24,8 +24,6 @@ li {
   urls.
 3. font-weight and font-style: Here we are specifying the weight and styles of our specific
   fonts. So 'GT Walsheim Pro' will be a regular font weight and normal font style.
-
-
 */
 @font-face {
 	font-family: GT Walsheim Pro;

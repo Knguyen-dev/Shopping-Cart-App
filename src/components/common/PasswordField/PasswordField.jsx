@@ -14,6 +14,7 @@ export default function PasswordField({
 	helperText,
 	error = false,
 	onChange,
+	required,
 }) {
 	const [showPassword, setShowPassword] = useState(false);
 	const toggleShowPassword = () => setShowPassword((show) => !show);
@@ -26,6 +27,7 @@ export default function PasswordField({
 			helperText={helperText}
 			variant={variant}
 			onChange={onChange}
+			required={required}
 			value={value}
 			error={error}
 			type={showPassword ? "text" : "password"}
@@ -54,4 +56,5 @@ PasswordField.propTypes = {
 	helperText: PropTypes.string,
 	error: PropTypes.bool,
 	onChange: PropTypes.func,
+	required: PropTypes.bool,
 };

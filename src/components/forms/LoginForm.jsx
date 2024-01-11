@@ -55,6 +55,7 @@ export default function LoginForm({ onSubmit }) {
 					value={formValues.username}
 					error={formErrors.username ? true : false}
 					helperText={formErrors.username && formErrors.username}
+					required
 				/>
 
 				<PasswordField
@@ -66,6 +67,7 @@ export default function LoginForm({ onSubmit }) {
 					value={formValues.password}
 					error={formErrors.password ? true : false}
 					helperText={formErrors.password && formErrors.password}
+					required
 				/>
 
 				<Button

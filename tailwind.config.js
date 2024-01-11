@@ -17,11 +17,6 @@ export default {
 			lg: "1200px",
 			xl: "1536px",
 		},
-		extend: {
-			colors: {
-				"black-10": "rgba(0, 0, 0, 0.1)",
-			},
-		},
 	},
 	prefix: "tw-",
 };

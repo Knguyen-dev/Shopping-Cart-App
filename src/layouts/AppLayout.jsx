@@ -2,7 +2,7 @@ import { Outlet, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { Link, Button, Grid, Badge, Box } from "@mui/material";
 
-import BasicSearchBar from "../components/common/PasswordField/BasicSearchBar/BasicSearchBar";
+import BasicSearchBar from "../components/common/BasicSearchBar/BasicSearchBar";
 import MobileMenu from "../components/common/MobileMenu.jsx/MobileMenu";
 
 import PropTypes from "prop-types";

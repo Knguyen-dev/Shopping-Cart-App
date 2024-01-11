@@ -3,6 +3,7 @@ import ReactDOM from "react-dom/client";
 import App from "./App.jsx";
 import "./index.css";
 import { appTheme } from "./appTheme.jsx";
+// import { CssBaseline } from "@mui/material";
 
 import { StyledEngineProvider, ThemeProvider } from "@mui/material/styles";
 ReactDOM.createRoot(document.getElementById("root")).render(

@@ -29,7 +29,11 @@ export default function MobileMenu({ menuLinks }) {
 			<Button variant="outlined" size="large" onClick={handleOpenMenu}>
 				Menu
 			</Button>
-			<Menu anchorEl={anchorEl} open={open} onClose={() => setAnchorEl(null)}>
+			<Menu
+				color="secondary"
+				anchorEl={anchorEl}
+				open={open}
+				onClose={() => setAnchorEl(null)}>
 				{menuLinks.map((item) => (
 					<MenuItem key={item.id} onClick={() => handleItemClick(item.route)}>
 						{item.content}
@@ -44,7 +48,7 @@ MobileMenu.propTypes = {
 	menuLinks: PropTypes.arrayOf(
 		PropTypes.shape({
 			id: PropTypes.number,
-			route: PropTypes.route,
+			route: PropTypes.string,
 		})
 	),
 };

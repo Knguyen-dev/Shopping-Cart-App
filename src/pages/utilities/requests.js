@@ -26,9 +26,9 @@ export function processGames(gameList) {
 			slug: gameObj.slug,
 			name: gameObj.name,
 			released: gameObj.released,
-			background_image: gameObj.background_image
-				? gameObj.background_image
-				: notFoundImg,
+
+			// Could be null
+			background_image: gameObj.background_image,
 			platforms: gameObj.platforms
 				? gameObj.platforms.map((platformObj) => platformObj.platform.name)
 				: [],

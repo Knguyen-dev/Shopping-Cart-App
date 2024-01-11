@@ -26,4 +26,16 @@ export const appTheme = createTheme({
 			},
 		},
 	},
+	palette: {
+		// Current using dark mode, this actually messe up our forms
+		// Well need more information on how to do dark and light mode if we want to do this.
+
+		// mode: "dark",
+		primaryDark: {
+			main: "#0f1011",
+		},
+		secondaryDark: {
+			main: "#111827",
+		},
+	},
 });
