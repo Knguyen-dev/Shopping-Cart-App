@@ -182,7 +182,7 @@ export default function GameDetailsPage() {
 						) : // Else finished fetch, but no images found
 						gameImages.length === 0 ? (
 							<img
-								className="tw-h-full tw-min-h-80"
+								className="tw-w-full"
 								src={notFoundImg}
 								alt="Game Images Not Found"
 							/>

@@ -1,4 +1,5 @@
 import "../styles/SidebarSection.css";
+
 import PropTypes from "prop-types";
 function SidebarTab({ tabObj, onClick, isActive }) {
 	return (

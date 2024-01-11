@@ -12,7 +12,7 @@ export default function LoginPage() {
 			<LoginForm onSubmit={auth.onLogin} />
 
 			{/* Bottom section contining extra extra links */}
-			<div className="tw-flex tw-flex-col tw-gap-y-2 tw-text-center">
+			<div className="tw-flex tw-flex-col tw-text-center">
 				<a href="#">Forgot Password?</a>
 				<hr></hr>
 				<Button

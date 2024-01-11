@@ -6,9 +6,15 @@
   here, we'll just use an array and such since we're making up our prices
 
 */
-import { Button, ButtonGroup, Typography, Box } from "@mui/material";
+import {
+	Button,
+	ButtonGroup,
+	Typography,
+	Box,
+	Grid,
+	Container,
+} from "@mui/material";
 import { useCartContext } from "./ContextProviders/hooks/useCartContext";
-import "../styles/CartPage.css";
 export default function CartPage() {
 	const shoppingCart = useCartContext();
 	const cartQuantity = shoppingCart.getTotalQuantity();
@@ -30,14 +36,14 @@ export default function CartPage() {
 	// Markup we show when there are no items in the cart
 	if (cartQuantity === 0) {
 		return (
-			<div className="tw-flex tw-h-full tw-flex-col tw-items-center tw-justify-center">
-				<h1 className="tw-text-4xl">No items in cart!</h1>
-			</div>
+			<Box className="tw-flex tw-h-full tw-flex-col tw-items-center tw-justify-center">
+				<Typography variant="h2">No items in cart!</Typography>
+			</Box>
 		);
 	}
 
 	return (
-		<div className="tw-px-12 tw-py-4">
+		<Container maxWidth="xl" className="tw-px-12 tw-py-4">
 			{/* Cart page header */}
 			<header className="tw-mb-4">
 				<Typography variant="h3" className="tw-font-bold">
@@ -45,14 +51,15 @@ export default function CartPage() {
 				</Typography>
 			</header>
 
-			{/* Main content for cart page */}
-			<main className="tw-flex tw-flex-col-reverse tw-gap-x-4 md:tw-flex-row">
+			<Grid
+				container
+				spacing={2}
+				columns={10}
+				className="xs:max-md:tw-flex-col-reverse">
 				{/* Main content for the cart that contains the cards for the cart items */}
-				<div className="cart-page-main-content tw-flex tw-flex-col tw-gap-y-2">
+				<Grid item xs={10} md={7} className="tw-flex tw-flex-col tw-gap-y-2">
 					{shoppingCart.itemArr.map((gameObj) => {
 						const itemQuantity = shoppingCart.getItemQuantity(gameObj.id);
-
-						// Render a cart card
 						return (
 							<div
 								key={gameObj.id}
@@ -89,7 +96,7 @@ export default function CartPage() {
 									<Box className="tw-mt-4 tw-flex tw-gap-x-4 tw-gap-y-4">
 										<Button
 											variant="contained"
-											className="tw-bg-red-700"
+											color="error"
 											onClick={() => shoppingCart.removeFromCart(gameObj.id)}>
 											Remove
 										</Button>
@@ -114,10 +121,14 @@ export default function CartPage() {
 							</div>
 						);
 					})}
-				</div>
+				</Grid>
 
 				{/* Sidebar for the cart page */}
-				<div className="cart-page-sidebar tw-mb-4 md:tw-sticky md:tw-top-4 md:tw-self-start">
+				<Grid
+					item
+					xs={10}
+					md={3}
+					className="tw-mb-4 md:tw-sticky md:tw-top-4 md:tw-self-start">
 					{/* Subtotal section */}
 					<div className="custom-section tw-flex tw-flex-col tw-gap-y-1">
 						{/* Subtotal */}
@@ -153,8 +164,8 @@ export default function CartPage() {
 							Continue to Checkout
 						</Button>
 					</div>
-				</div>
-			</main>
-		</div>
+				</Grid>
+			</Grid>
+		</Container>
 	);
 }

@@ -46,8 +46,13 @@ function cartReducer(state, action) {
 
 export const useShoppingCart = () => {
 	const [cart, cartDispatch] = useReducer(cartReducer, {
+		// List of items in cart
 		itemArr: [],
+
+		// Item ids and their quantities
 		itemMap: {},
+
+		// item ids and their prices
 		priceMap: {},
 	});
 

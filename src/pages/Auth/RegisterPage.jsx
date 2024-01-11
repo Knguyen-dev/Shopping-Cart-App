@@ -9,7 +9,7 @@ export default function RegisterPage() {
 				Sign up Today!
 			</Typography>
 			<RegisterForm />
-			<Box className="tw-flex tw-flex-col tw-gap-y-2">
+			<Box className="tw-flex tw-flex-col">
 				<Typography
 					variant="span"
 					className="tw-flex tw-items-center tw-justify-center tw-gap-x-2">

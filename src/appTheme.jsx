@@ -1,8 +1,7 @@
-import { createTheme } from "@mui/material";
-
+import { createTheme, responsiveFontSizes } from "@mui/material";
 const rootElement = document.getElementById("root");
 // Theme style override: For overriding css styles
-export const appTheme = createTheme({
+const appTheme = createTheme({
 	components: {
 		// This section is for integrating with tailwindcss
 		MuiPopover: {
@@ -30,7 +29,6 @@ export const appTheme = createTheme({
 		// Current using dark mode, this actually messe up our forms
 		// Well need more information on how to do dark and light mode if we want to do this.
 
-		// mode: "dark",
 		primaryDark: {
 			main: "#0f1011",
 		},
@@ -39,3 +37,5 @@ export const appTheme = createTheme({
 		},
 	},
 });
+
+export const responsiveAppTheme = responsiveFontSizes(appTheme);

@@ -1,3 +1,9 @@
+/*
++ NOTE: User page just for filler, it's not actually finished 
+  and it won't be. it just sets up what would be put for a user page for a real website.
+
+*/
+
 export default function AccountHomePage() {
 	return (
 		<main className="account-home-page">

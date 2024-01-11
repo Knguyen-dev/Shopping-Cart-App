@@ -1,12 +1,12 @@
 import { Outlet, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { Link, Button, Grid, Badge, Box } from "@mui/material";
-
 import BasicSearchBar from "../components/common/BasicSearchBar/BasicSearchBar";
 import MobileMenu from "../components/common/MobileMenu.jsx/MobileMenu";
 
-import PropTypes from "prop-types";
 import "../styles/AppLayout.css";
+
+import PropTypes from "prop-types";
 import { useAuthContext } from "../pages/ContextProviders/hooks/useAuthContext";
 import { useCartContext } from "../pages/ContextProviders/hooks/useCartContext";
 // Navbar component for our app
@@ -173,7 +173,7 @@ export default function AppLayout({ handleSubmitSearch }) {
 			<header className="tw-bg-gray-950 tw-px-6 tw-py-6 tw-text-white">
 				<Navbar handleSubmitSearch={handleSubmitSearch} />
 			</header>
-			<main className="tw-relative tw-bg-gray-950 tw-text-white">
+			<main className="tw-bg-gray-950 tw-text-white">
 				<Outlet />
 			</main>
 			<Footer />

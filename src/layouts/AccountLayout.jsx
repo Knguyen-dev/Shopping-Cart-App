@@ -2,7 +2,8 @@ import { Outlet } from "react-router-dom";
 import { accountSidebarSections } from "../pages/utilities/constants";
 import SidebarSection from "../components/SidebarSection";
 import { useAuthContext } from "../pages/ContextProviders/hooks/useAuthContext";
-import { CiLogout } from "react-icons/ci";
+import { Button, Typography, Box } from "@mui/material";
+import LogoutIcon from "@mui/icons-material/Logout";
 
 export default function AccountPage() {
 	const auth = useAuthContext();
@@ -10,8 +11,8 @@ export default function AccountPage() {
 	return (
 		<div className="account-page tw-px-4">
 			{/* This is where you'd put your breadcrumbs. */}
-			<header className="tw-mb-8">
-				<h1>My account / Home</h1>
+			<header className="tw-mb-4">
+				<Typography variant="h6">My Account / Home</Typography>
 			</header>
 
 			{/* Main content for the account page */}
@@ -19,12 +20,12 @@ export default function AccountPage() {
 				{/* Sidebar */}
 				<div className="account-sidebar tw-basis-1/5">
 					{/* Sidebar header */}
-					<div className="custom-section tw-mb-2">
-						<h1 className="tw-text-3xl">Hi, User</h1>
-						<span className="tw-text-gray-300">
+					<Box className="custom-section tw-mb-2">
+						<Typography variant="h4">Hi, User</Typography>
+						<Typography variant="span">
 							Thanks for being a GamerCity customer!
-						</span>
-					</div>
+						</Typography>
+					</Box>
 
 					{/* The sidebar section, where each tab would navigate you to a different
             page controlled by the AccountLayout */}
@@ -37,14 +38,14 @@ export default function AccountPage() {
 					))}
 
 					{/* Section for signing out */}
-					<div>
-						<button
-							className="btn btn-primary tw-flex tw-cursor-pointer tw-items-center tw-gap-x-2"
+					<Box>
+						<Button
+							variant="contained"
+							startIcon={<LogoutIcon />}
 							onClick={auth.onLogout}>
-							<CiLogout />
-							<span>Sign Out</span>
-						</button>
-					</div>
+							Sign Out
+						</Button>
+					</Box>
 				</div>
 
 				{/* Main section where all of the sub pages will appear. Should be located

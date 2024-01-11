@@ -65,12 +65,6 @@ li {
 	text-rendering: optimizeLegibility;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
-
-	--bg-primary-dark: #0f1011;
-	--bg-secondary-dark: #111827;
-
-	--border-radius: 6px;
-	--transition: all 200ms ease-in-out;
 }
 
 a {
@@ -82,6 +76,10 @@ nav a {
 
 a:hover {
 	text-decoration: underline;
+}
+
+footer a {
+	color: white;
 }
 
 /* ===== Scrollbar CSS ===== */
@@ -110,4 +108,8 @@ body {
 	/* Inherit margin settings of 0 from top rule */
 	margin: inherit;
 	font-family: var(--font-family);
+}
+
+.custom-section {
+	@apply tw-rounded-md tw-bg-gray-800 tw-p-4;
 }

@@ -32,7 +32,6 @@ import {
 	orderingOptions,
 	platformOptions,
 } from "./pages/utilities/constants";
-import "./App.css";
 
 export default function App() {
 	const [activeTab, setActiveTab] = useState({});
