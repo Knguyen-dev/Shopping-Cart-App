@@ -1,46 +1,61 @@
+import { Box, Button, Menu, MenuItem, Typography } from "@mui/material";
+import CheckIcon from "@mui/icons-material/Check";
+import { useState } from "react";
 import PropTypes from "prop-types";
+
 /*
 + CustomDropDown: A custom dropdown component that's created
-  using a combination of bootstrap and tailwind css.
-
+  using a combination of mui and tailwind css.
 */
 
-import { FaCheck } from "react-icons/fa";
 export default function CustomDropDown({
 	dropDownOptions,
 	currentOption,
 	setOption,
-	handleDropDownChange,
+	onDropDownChange,
 }) {
+	const [anchorEl, setAnchorEl] = useState(null);
+	const open = Boolean(anchorEl);
+
+	const handleOpenMenu = (e) => {
+		setAnchorEl(e.target);
+	};
+
+	// Handles menu item click
+	const handleDropDownChange = (optionObj) => {
+		onDropDownChange(optionObj, setOption);
+		setAnchorEl(null);
+	};
+
 	return (
-		<div className="dropdown">
+		<Box className="dropdown">
 			{/* Button that shows current option picked in dropdown */}
-			<button
-				className="dropdown-toggle tw-flex tw-items-center tw-gap-x-1 tw-rounded-md tw-bg-white tw-px-4 tw-py-2 tw-text-black"
-				type="button"
-				data-bs-toggle="dropdown"
-				aria-expanded="false">
-				{dropDownOptions.dropDownTitle}:{" "}
-				<strong>{currentOption.optionTitle}</strong>
-			</button>
-			{/* Create the list of drop down options */}
-			<ul className="dropdown-menu">
+			<Button variant="contained" onClick={handleOpenMenu}>
+				<Typography variant="span" className="tw-mr-1">
+					{dropDownOptions.dropDownTitle}:
+				</Typography>
+				<Typography variant="span" fontWeight={700}>
+					{currentOption.optionTitle}
+				</Typography>
+			</Button>
+
+			{/* Menu drop down itself */}
+			<Menu anchorEl={anchorEl} open={open} onClose={() => setAnchorEl(null)}>
 				{dropDownOptions.options.map((optionObj, index) => {
 					return (
-						<li key={index}>
-							<span
-								className="dropdown-item tw-flex tw-items-center tw-justify-between tw-transition-all hover:tw-to-black-10"
-								onClick={() => handleDropDownChange(optionObj, setOption)}>
-								{optionObj.optionTitle}{" "}
-								{currentOption.optionTitle === optionObj.optionTitle && (
-									<FaCheck />
-								)}
-							</span>
-						</li>
+						<MenuItem
+							key={index}
+							onClick={() => handleDropDownChange(optionObj)}
+							className="tw-gap-x-3">
+							<Typography variant="span">{optionObj.optionTitle}</Typography>
+							{currentOption.optionTitle === optionObj.optionTitle && (
+								<CheckIcon className="tw-ml-auto" />
+							)}
+						</MenuItem>
 					);
 				})}
-			</ul>
-		</div>
+			</Menu>
+		</Box>
 	);
 }
 CustomDropDown.propTypes = {
@@ -58,5 +73,5 @@ CustomDropDown.propTypes = {
 		searchParams: PropTypes.object.isRequired,
 	}),
 	setOption: PropTypes.func,
-	handleDropDownChange: PropTypes.func,
+	onDropDownChange: PropTypes.func,
 };

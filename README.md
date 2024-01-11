@@ -41,3 +41,21 @@
   deploy a site.
 3. Choose the repository you want to deploy from and select it.
 4. You should be done as it does all work for you.
+
+
++ What we're doing now:
+1. Upgrading a few things with the integration of Mui. Forms, buttons,
+  icon buttons. Mainly replacing bootstrap in terms of component libraries.
+2. Going to add loading skeletons, spinners, and maybe even replace the carousel.
+3. Likely going to use memoization on our shopping cart hook for calculating cart total.
+
+
++ Validating/managing forms in react without external libraries:
+https://www.google.com/search?client=opera-gx&q=best+way+to+do+form+errors+in+react&sourceid=opera&ie=UTF-8&oe=UTF-8#fpstate=ive&vld=cid:41aa095b,vid:EYpdEYK25Dc,st:0
+
+Comments: Could be a decent watch, over using react-hook-forms.
+
+
+NOTE: 
+1. While developing and creating PasswordField we got "Grid2.js:7 Uncaught TypeError: styled_default is not a     function at Grid2.js:7:26". After trying to figure stuff out, we decided to move back to the original 
+Grid rather than Grid 2.0, and that solved our problem.

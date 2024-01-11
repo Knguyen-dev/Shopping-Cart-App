@@ -50,13 +50,17 @@ height: 100%; carousel takes full height on our larger screens, but min-height
 .carousel-indicators {
 	position: absolute;
 	background-color: black;
-	width: fit-content;
-	bottom: 0;
-	@apply tw-mx-auto tw-flex tw-gap-x-2 tw-rounded-lg tw-p-2;
+	opacity: 0.9;
+	left: 50%;
+	transform: translateX(-50%);
+	bottom: 5%;
+	z-index: 1;
+	@apply tw-flex tw-gap-x-2 tw-rounded-lg tw-p-2;
 }
 .carousel-indicators button {
 	width: 25px;
 	height: 25px;
+	border: none;
 	@apply tw-rounded-full tw-bg-black tw-text-white tw-transition-all;
 }
 .carousel-indicators button:hover {

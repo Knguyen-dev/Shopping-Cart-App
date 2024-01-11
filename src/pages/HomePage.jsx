@@ -1,21 +1,28 @@
-import { NavLink } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { Button, Typography, Container } from "@mui/material";
 import "../styles/HomePage.css";
 
 export default function HomePage() {
+	const navigate = useNavigate();
 	return (
 		<div className="home-page">
-			<div className="tw-my-8">
-				<h2 className="tw-mb-4 tw-text-6xl">Welcome to GamerCity</h2>
-				<p className="tw-mx-auto tw-mb-4 tw-text-lg sm:tw-w-1/2">
+			<Container maxWidth="md" className="tw-my-8">
+				<Typography variant="h2" className="xs:max-sm:tw-text-3xl">
+					Welcome to GamerCity
+				</Typography>
+				<Typography variant="p" className="tw-my-4 tw-block">
 					Discover your favorite games. Not a real shop, but it imitates what a
 					ecommerce site for games could look like. Feel free to look around
 					though.
-				</p>
-
-				<button className="tw-rounded-sm tw-bg-slate-500 tw-px-5 tw-py-2 tw-text-xl tw-text-white">
-					<NavLink to="/browse">Shop Now</NavLink>
-				</button>
-			</div>
+				</Typography>
+				<Button
+					variant="outlined"
+					onClick={() => navigate("/browse")}
+					color="info"
+					size="large">
+					Shop Now
+				</Button>
+			</Container>
 		</div>
 	);
 }

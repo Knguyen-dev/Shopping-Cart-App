@@ -32,7 +32,6 @@ import {
 	orderingOptions,
 	platformOptions,
 } from "./pages/utilities/constants";
-import "./App.css";
 
 export default function App() {
 	const [activeTab, setActiveTab] = useState({});
@@ -129,7 +128,7 @@ export default function App() {
 	};
 
 	// Handles changing drop down parameter and searches for games after change
-	const handleDropDownChange = (optionObj, setOption) => {
+	const onDropDownChange = (optionObj, setOption) => {
 		const newSearchParams = updateSearchParams(
 			searchParams,
 			optionObj.searchParams
@@ -207,7 +206,7 @@ export default function App() {
 									useDefault={useDefault}
 									loadInitialBrowsePage={loadInitialBrowsePage}
 									onTabClick={onTabClick}
-									handleDropDownChange={handleDropDownChange}
+									onDropDownChange={onDropDownChange}
 								/>
 							}
 						/>

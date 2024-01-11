@@ -1,4 +1,3 @@
-@tailwind base;
 @tailwind components;
 @tailwind utilities;
 
@@ -7,6 +6,13 @@
 	margin: 0;
 	padding: 0;
 	box-sizing: border-box;
+}
+
+ul,
+li {
+	margin: 0;
+	padding: 0;
+	list-style: none;
 }
 
 /*
@@ -18,8 +24,6 @@
   urls.
 3. font-weight and font-style: Here we are specifying the weight and styles of our specific
   fonts. So 'GT Walsheim Pro' will be a regular font weight and normal font style.
-
-
 */
 @font-face {
 	font-family: GT Walsheim Pro;
@@ -61,12 +65,6 @@
 	text-rendering: optimizeLegibility;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
-
-	--bg-primary-dark: #0f1011;
-	--bg-secondary-dark: #111827;
-
-	--border-radius: 6px;
-	--transition: all 200ms ease-in-out;
 }
 
 a {
@@ -78,6 +76,10 @@ nav a {
 
 a:hover {
 	text-decoration: underline;
+}
+
+footer a {
+	color: white;
 }
 
 /* ===== Scrollbar CSS ===== */
@@ -103,5 +105,11 @@ a:hover {
 }
 
 body {
+	/* Inherit margin settings of 0 from top rule */
+	margin: inherit;
 	font-family: var(--font-family);
+}
+
+.custom-section {
+	@apply tw-rounded-md tw-bg-gray-800 tw-p-4;
 }

@@ -2,12 +2,20 @@
 
 export default {
 	content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
-	darkMode: "class",
+
+	corePlugins: {
+		preflight: false,
+	},
+	important: "#root",
 	theme: {
-		extend: {
-			colors: {
-				"black-10": "rgba(0, 0, 0, 0.1)",
-			},
+		// Use mui a lot so we're going to make tailwind breakpoints match mui breakpoints
+		// As a result, it's easier to add conditional styles
+		screens: {
+			xs: "0px",
+			sm: "600px",
+			md: "900px",
+			lg: "1200px",
+			xl: "1536px",
 		},
 	},
 	prefix: "tw-",
