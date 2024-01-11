@@ -12,36 +12,12 @@
 	height: 100%;
 	@apply tw-bg-gray-950;
 }
-@media screen and (min-width: 640px) {
+
+/* On smaller and beyond we give space for our sidebar */
+@media screen and (min-width: 600px) {
 	.browsing-page {
 		grid-template-columns: auto 1fr;
 	}
-}
-
-/*
-+ Sidebar
-- On smaller screens: Make this position fixed that fills entire screen and a grid. 
-  This is to make things responsive and allow the user to hide or show the sidebar 
-  via a button now. (640px and below)
-
-- On small breakpoint and higher, we make it a flex box and now our sidebar should be in 
-  the normal page flow. It should be a sticky sidebar off to the left of the main content.
-
-  NOTE: You have to define a height for sticky to work, so we did 
-  height: 100vh for above the small breakpoint. Know that doing height: 100vh
-  as a default style will make the sidebar look weird below the small breakpoint.
-*/
-.browsing-sidebar {
-	position: fixed;
-	inset: 0;
-	z-index: 10;
-	padding: 1.5em 1em;
-	display: grid;
-	grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-	overflow-y: scroll;
-	/* Need bg so we can cover the browse page on mobile */
-	background-color: inherit;
-	@apply tw-gap-y-2  sm:tw-sticky sm:tw-top-0 sm:tw-flex sm:tw-h-screen sm:tw-flex-col;
 }
 
 /* 

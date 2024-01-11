@@ -6,7 +6,6 @@ import {
 	browseSidebarSections,
 	orderingOptions,
 	platformOptions,
-	SMALL_BREAKPOINT,
 } from "../utilities/constants.jsx";
 import "../../styles/BrowsingPage.css";
 import GameCard from "../../components/GameCard";
@@ -60,19 +59,6 @@ export default function BrowsingPage({
 		}
 	}, [useDefault, loadInitialBrowsePage]);
 
-	// Handles resizing of our sidebar when coming from below small breakpoint and going above it.
-	useEffect(() => {
-		function handleResize() {
-			const isLargeScreen = window.innerWidth >= SMALL_BREAKPOINT;
-			if (isLargeScreen && sidebarHidden) {
-				setSidebarHidden(false);
-			}
-		}
-		handleResize();
-		window.addEventListener("resize", handleResize);
-		return () => window.removeEventListener("resize", handleResize);
-	});
-
 	// On card click, navigate to the slug route (GameDetailsPage)
 	const onCardClick = (slug) => {
 		navigate(slug);
@@ -80,8 +66,33 @@ export default function BrowsingPage({
 
 	return (
 		<div className="browsing-page">
-			{/* Sidebar */}
-			<div className={`browsing-sidebar ${sidebarHidden ? "tw-hidden" : ""}`}>
+			{/* Mobile sidebar/menu: Automatically hidden for small breakpoint and beyond.
+        So sidebarHidden only controls whether it's rendered while the user is below that point.
+      
+        NOTE: We use the sidebar section to render two sidebars, one for extra small screens
+          and the other sidebar for larger screens. While you could combine the styles into 
+          one so that you don't have to do browserSidebarSections.map() twice, I found it a lot
+          cleaner and more maintainable if we had two. */}
+
+			{!sidebarHidden && (
+				<div
+					className="tw-fixed tw-inset-0 tw-z-10 tw-grid tw-overflow-y-scroll tw-bg-inherit tw-p-2 sm:tw-hidden"
+					style={{
+						"grid-template-columns": "repeat(auto-fill, minmax(150px, 1fr))",
+					}}>
+					{browseSidebarSections.map((sectionObj, index) => (
+						<SidebarSection
+							key={`${sectionObj.sectionTitle}-${index}`}
+							sectionObj={sectionObj}
+							activeTabID={activeTab.id}
+							onTabClick={onTabClick}
+						/>
+					))}
+				</div>
+			)}
+
+			{/* Sidebar only visible on small or higher screens*/}
+			<div className="tw-gap-y-2 tw-px-2 xs:max-sm:tw-hidden sm:tw-sticky sm:-tw-top-0 sm:tw-flex sm:tw-h-screen sm:tw-flex-col">
 				{browseSidebarSections.map((sectionObj, index) => (
 					<SidebarSection
 						key={`${sectionObj.sectionTitle}-${index}`}
@@ -99,7 +110,6 @@ export default function BrowsingPage({
 				onClick={() => setSidebarHidden((state) => !state)}>
 				{sidebarHidden ? "Show" : "Hide"}
 			</Button>
-
 			{/* Main section for the browsing page that has drop downs and game cards  */}
 			<main className="browsing-main tw-px-4 tw-text-white">
 				{/* Header with the the  drop downs and tab title*/}

@@ -1,11 +1,11 @@
 import "../styles/SidebarSection.css";
-
+import { Typography } from "@mui/material";
 import PropTypes from "prop-types";
 function SidebarTab({ tabObj, onClick, isActive }) {
 	return (
 		<li className={`sidebar-tab ${isActive && "active-tab"}`} onClick={onClick}>
 			<div className="sidebar-tab-icon">{tabObj.icon}</div>
-			<span className="sidebar-tab-title">{tabObj.tabTitle}</span>
+			<Typography className="sidebar-tab-title">{tabObj.tabTitle}</Typography>
 		</li>
 	);
 }

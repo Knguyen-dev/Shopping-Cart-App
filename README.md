@@ -24,7 +24,7 @@
 + Tech used:
 1. Vite and React (Project setup)
 2. React Router Dom (Client side routing)
-3. Tailwindcss (For easy styling) and Boostrap (Components)
+3. Tailwindcss (For easy styling) and Material UI (Component Library).
 
 
 + Design Inspirations and credits:

@@ -320,9 +320,6 @@ export const icon_map = {
 export const apiKey = "79e2d19924d040afa2644aa5867a40f4";
 export const baseURL = "https://api.rawg.io/api/games";
 
-// Small breakpoint for screens (in pixels)
-export const SMALL_BREAKPOINT = 640;
-
 // Action keywords for useReducer in useShoppingCart hook.
 export const CART_ACTIONS = {
 	addToCart: "ADD_TO_CART",
